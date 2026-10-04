@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NS HOME | 엔에스 홈 - 사계절의 온도를 전하는 프리미엄 계절 라이프스타일 샵</title>
+  <meta name="description" content="쿠팡 1위 NS 웜 플리스 극세사 담요, 캐시미어 블랭킷부터 여름 완판 암막 양산과 에어로 넥쿨러까지. 사계절을 완성하는 NS HOME 공식 자사몰">
+  
+  <!-- Favicon & Styles -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-banner">
+    <span class="badge-pill">MEMBER ONLY</span>
+    <span>자사몰 첫 구매 <strong>3,000원 즉시 할인 쿠폰</strong> 증정 & 30,000원 이상 전 상품 <strong>무료배송</strong></span>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo" aria-label="NS HOME 홈으로 이동">
+        <span class="brand-name">NS HOME</span>
+        <span class="brand-sub">Seasonal Boutique</span>
+      </a>
+
+      <nav aria-label="주요 메뉴">
+        <ul class="nav-links">
+          <li><a href="#products" class="nav-link active">윈터 담요 컬렉션 <span class="nav-tag">HOT</span></a></li>
+          <li><a href="#products" class="nav-link" onclick="document.querySelector('[data-filter=summer]').click()">서머 아카이브</a></li>
+          <li><a href="#brand" class="nav-link">브랜드 스토리</a></li>
+          <li><a href="#reviews" class="nav-link">실구매자 리뷰</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- 장바구니 버튼 -->
+        <button class="btn-icon" id="openCartBtn" aria-label="장바구니 보기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-badge" style="display:none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-image-wrap">
+          <img src="images/hero.jpg" alt="NS HOME 프리미엄 겨울 담요 컬렉션">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-season-tag">
+            <span>❄️ WINTER 2024 / 2025 FLAGSHIP</span>
+          </div>
+          <h1 class="hero-title">
+            살결에 닿는 첫 번째 온기,<br>
+            <em>NS 웜 블랭킷</em>
+          </h1>
+          <p class="hero-desc">
+            찬 바람 부는 계절, 당신의 공간을 가장 따스하게 안아주는 고밀도 극세사 플리스 담요.<br>
+            쿠팡 실구매 만족도 98%의 포근함을 자사몰 단독 추가 혜택으로 경험해 보세요.
+          </p>
+          <div class="hero-buttons">
+            <a href="#products" class="btn-primary" onclick="document.querySelector('[data-filter=winter]').click()">
+              겨울 신상품 보러가기
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#reviews" class="btn-glass">
+              고객 실구매 후기
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Marquee Bar -->
+  <div class="benefits-marquee" aria-hidden="true">
+    <div class="marquee-content">
+      <div class="marquee-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        <span>자사몰 첫 구매 고객 즉시 3,000원 할인</span>
+      </div>
+      <div class="marquee-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        <span>30,000원 이상 주문 시 전 지역 무료 배송</span>
+      </div>
+      <div class="marquee-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>12시 이전 주문 시 당일 안심출고</span>
+      </div>
+      <!-- Loop Items for continuous marquee -->
+      <div class="marquee-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        <span>자사몰 첫 구매 고객 즉시 3,000원 할인</span>
+      </div>
+      <div class="marquee-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        <span>30,000원 이상 주문 시 전 지역 무료 배송</span>
+      </div>
+      <div class="marquee-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>12시 이전 주문 시 당일 안심출고</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Section -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle">SEASONAL CURATION</p>
+        <h2 class="section-title">계절을 담은 NS 셀렉션</h2>
+        <p class="section-desc">
+          한겨울을 녹이는 극상의 극세사 담요부터 지난 여름 완판을 기록한 양산과 넥쿨러까지,<br>
+          계절의 가장 특별한 순간을 함께할 제품들을 소개합니다.
+        </p>
+      </div>
+
+      <!-- Season Tabs -->
+      <div class="season-tabs">
+        <button class="season-tab active" data-filter="all">전체보기</button>
+        <button class="season-tab" data-filter="winter">❄️ 윈터 담요 컬렉션</button>
+        <button class="season-tab" data-filter="summer">☀️ 서머 아카이브 (양산/넥쿨러)</button>
+        <button class="season-tab" data-filter="best">★ 명예의 전당 베스트</button>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="product-grid" id="productGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story Section -->
+  <section class="section brand-story" id="brand">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-image-wrap">
+          <img src="images/blanket_cashmere.jpg" alt="NS HOME 장인정신과 디테일" style="width:100%; height:460px; object-fit:cover;">
+        </div>
+        <div class="story-content">
+          <p class="section-subtitle">PHILOSOPHY OF NS HOME</p>
+          <h2>당신의 하루에<br>적절한 온도를 찾아주는 일</h2>
+          <p>
+            NS HOME은 매일 변화하는 계절의 날씨 속에서 사람이 느끼는 가장 쾌적하고 편안한 온도를 고민합니다.
+          </p>
+          <p>
+            여름에는 뜨거운 태양과 습기를 차단하는 정교한 경량 암막 양산과 목 뒤를 얼음처럼 식혀주는 스마트 넥쿨러로 일상을 지켰으며, 
+            차가운 바람이 시작되는 올겨울에는 살결에 닿는 첫 터치부터 포근한 온기가 감도는 고밀도 극세사 담요와 프리미엄 울 블랭킷을 완성했습니다.
+          </p>
+          <div class="story-stats">
+            <div class="stat-item">
+              <h3>6,500+</h3>
+              <p>누적 판매 & 실구매 만족</p>
+            </div>
+            <div class="stat-item">
+              <h3>98.7%</h3>
+              <p>포근함 & 쿨링 체감 평점</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>엄선 프리미엄 안심 소재</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle">VERIFIED CUSTOMER REVIEWS</p>
+        <h2 class="section-title">직접 써보신 고객님들의 온기</h2>
+        <p class="section-desc">쿠팡과 공식 자사몰을 통해 직접 사용하고 남겨주신 솔직한 생생 후기입니다.</p>
+      </div>
+
+      <div class="review-cards" id="reviewCards">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-grid">
+
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <div class="trust-text">
+            <h4>당일 안심 특송</h4>
+            <p>12시 이전 주문 시 당일 안심출고</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+          </div>
+          <div class="trust-text">
+            <h4>7일 안심 무료교환/반품</h4>
+            <p>불만족 시 100% 교환 및 환불 보장</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+          <div class="trust-text">
+            <h4>1:1 전담 고객만족센터</h4>
+            <p>카카오톡 및 고객센터 친절 상담</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>NS HOME</h3>
+          <p>
+            계절의 흐름 속에서 가장 편안한 공간을 제안하는 프리미엄 계절 라이프스타일 부티크 스토어.<br>
+            여름에는 시원함을, 겨울에는 포근한 온기를 전해 드립니다.
+          </p>
+          <div style="font-size:0.8rem; color:#8C8077; line-height:1.6;">
+            상호명: 엔에스 홈 (NS HOME) | 대표자: 윤남식<br>
+            사업자등록번호: 306-47-91364 | 통신판매업신고: 2026-충남예산-00057<br>
+            소재지: 충남 예산군 삽교읍 목리89 | 고객센터: 070-4517-3352 (평일 10:00~17:00)
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">COLLECTIONS</h4>
+          <ul class="footer-links">
+            <li><a href="#products" onclick="document.querySelector('[data-filter=winter]').click()">❄️ 윈터 극세사 담요</a></li>
+            <li><a href="#products" onclick="document.querySelector('[data-filter=winter]').click()">❄️ 캐시미어 울 블랭킷</a></li>
+            <li><a href="#products" onclick="document.querySelector('[data-filter=summer]').click()">☀️ 올데이 암막 양산</a></li>
+            <li><a href="#products" onclick="document.querySelector('[data-filter=summer]').click()">☀️ 스마트 에어로 넥쿨러</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">SHOPPING GUIDE</h4>
+          <ul class="footer-links">
+            <li><a href="https://www.coupang.com/vp/products/9748731700?itemId=29188981921&vendorItemId=96109969727&q=ns%EB%8B%B4%EC%9A%94" target="_blank" rel="noopener">쿠팡 공식 판매처</a></li>
+            <li><a href="#brand">브랜드 소개</a></li>
+            <li><a href="#reviews">고객 후기</a></li>
+            <li><a href="#" onclick="alert('이용약관 및 개인정보처리방침 안내입니다.'); return false;">이용약관 및 개인정보처리방침</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">SEASON NEWSLETTER</h4>
+          <p style="font-size:0.82rem; color:#A3968E; margin-bottom:10px;">
+            새로운 계절 신상품 출시 및 자사몰 단독 시크릿 쿠폰 소식을 가장 먼저 받아보세요.
+          </p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('구독이 완료되었습니다. 첫 구매 3,000원 쿠폰이 발급되었습니다.');">
+            <input type="email" placeholder="이메일 주소를 입력하세요" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">구독</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2024 NS HOME. All rights reserved. Designed for Premium Seasonal Comfort.</div>
+        <div style="display:flex; gap:16px;">
+          <span>에스크로 구매안전서비스 가입</span>
+          <span>안전 결제 시스템 보호</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =======================================================================
+       Modals & Drawers
+       ======================================================================= -->
+
+  <!-- Modal Backdrop Overlay -->
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+
+  <!-- Cart Slide-Over Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-label="장바구니">
+    <div class="cart-header">
+      <h3>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        장바구니 (<span class="cart-badge" style="position:static; border:none; display:inline-flex;">0</span>)
+      </h3>
+      <button class="btn-close-cart" id="closeCartBtn" aria-label="장바구니 닫기">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!-- Free Shipping Goal Tracker -->
+    <div class="shipping-bar-box">
+      <div class="shipping-bar-text" id="shippingProgressText"><strong>30,000원</strong> 이상 구매 시 무료배송!</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="shippingProgressFill"></div>
+      </div>
+    </div>
+
+    <!-- Cart Item List -->
+    <div class="cart-items" id="cartItems">
+      <!-- Dynamic Cart Items -->
+    </div>
+
+    <!-- Cart Bottom Summary -->
+    <div class="cart-footer">
+      <div class="coupon-box">
+        <div class="coupon-text">
+          🎟️ <strong>첫 구매 웰컴 쿠폰</strong> (-3,000원)
+        </div>
+        <button class="btn-apply-coupon" id="applyCouponBtn" type="button">쿠폰 적용</button>
+      </div>
+
+      <div class="summary-row">
+        <span>상품 주문금액</span>
+        <span id="cartSubtotal">0원</span>
+      </div>
+      <div class="summary-row" id="cartDiscountRow" style="display:none; color:var(--warm-terracotta);">
+        <span>쿠폰 할인</span>
+        <span id="cartDiscount">-3,000원</span>
+      </div>
+      <div class="summary-row">
+        <span>배송비</span>
+        <span id="cartShipping">0원</span>
+      </div>
+      <div class="summary-row total">
+        <span>최종 결제예정금액</span>
+        <span class="price" id="cartTotal">0원</span>
+      </div>
+
+      <button class="btn-checkout" id="proceedCheckoutBtn" type="button">
+        주문서 작성 및 결제하기
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Product Detail Modal -->
+  <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true">
+    <button class="btn-close-modal" id="closeDetailBtn" aria-label="창 닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="modal-grid">
+      <div class="modal-gallery">
+        <img id="modalImg" src="" alt="상품 상세 사진">
+      </div>
+      <div class="modal-content">
+        <span class="badge-float" id="modalBadge" style="position:static; display:inline-block; margin-bottom:12px; width:fit-content;">BEST</span>
+        <h3 id="modalTitle" style="font-family:var(--font-serif); font-size:1.8rem; margin-bottom:6px; color:var(--color-espresso);">상품명</h3>
+        <p id="modalSubtitle" style="font-size:0.9rem; color:var(--color-muted); margin-bottom:12px;">부제목</p>
+
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+          <span class="stars">★★★★★</span>
+          <span id="modalRating" style="font-size:0.85rem; font-weight:600;">4.9 (1,420 리뷰)</span>
+        </div>
+
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--color-border-light);">
+          <span id="modalPrice" style="font-size:1.6rem; font-weight:800; color:var(--color-espresso);">0원</span>
+          <span id="modalOriginalPrice" style="font-size:0.95rem; color:#A99F98; text-decoration:line-through;">0원</span>
+        </div>
+
+        <p id="modalDesc" style="font-size:0.9rem; line-height:1.65; color:var(--color-mocha); margin-bottom:20px;">
+          상품 설명
+        </p>
+
+        <!-- Options: Color -->
+        <div class="option-group">
+          <div class="option-label">
+            <span>색상 선택</span>
+            <strong id="modalColorName" style="color:var(--warm-terracotta);">테라코타 카멜</strong>
+          </div>
+          <div class="color-swatches" id="modalSwatches"></div>
+        </div>
+
+        <!-- Options: Size -->
+        <div class="option-group">
+          <div class="option-label"><span>사이즈 선택</span></div>
+          <select class="size-selector" id="modalSizeSelect"></select>
+        </div>
+
+        <!-- Quantity -->
+        <div class="option-group">
+          <div class="option-label"><span>수량</span></div>
+          <div class="qty-control" style="width:fit-content;">
+            <button class="qty-btn" id="modalQtyMinus">-</button>
+            <input type="text" id="modalQty" value="1" readonly class="qty-val" style="border:none; outline:none; background:transparent;">
+            <button class="qty-btn" id="modalQtyPlus">+</button>
+          </div>
+        </div>
+
+        <!-- Specs summary -->
+        <div id="modalSpecList" style="margin:16px 0; background:#FAF7F2; padding:12px 16px; border-radius:var(--radius-sm);"></div>
+
+        <div class="modal-action-row">
+          <button class="btn-modal-cart" id="modalAddToCartBtn" type="button">장바구니 담기</button>
+          <button class="btn-modal-buy" id="modalBuyNowBtn" type="button">바로 결제하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout & Payment Modal -->
+  <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true">
+    <button class="btn-close-modal" id="closeCheckoutBtn" aria-label="닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="checkout-header">
+      <h3>주문서 작성 및 결제</h3>
+      <p>안전한 SSL 보안 결제로 고객님의 결제 정보를 보호합니다.</p>
+    </div>
+
+    <!-- Order Items Summary -->
+    <div class="order-receipt-summary">
+      <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:10px; color:var(--color-espresso);">주문 상품 내역</h4>
+      <div id="checkoutItemsList"></div>
+      <div style="display:flex; justify-content:space-between; margin-top:10px; padding-top:10px; border-top:1px solid #E8E0D5; font-weight:700;">
+        <span>결제 예정 금액</span>
+        <span style="color:var(--warm-terracotta);" id="checkoutTotal">0원</span>
+      </div>
+    </div>
+
+    <form id="checkoutForm">
+      <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:12px; color:var(--color-espresso);">1. 배송지 정보 입력</h4>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">받는 분 성함 *</label>
+          <input type="text" class="form-input" id="buyerName" value="홍길동" placeholder="성함을 입력하세요" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">연락처 *</label>
+          <input type="tel" class="form-input" id="buyerPhone" value="010-1234-5678" placeholder="010-0000-0000" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">배송지 기본 주소 *</label>
+        <input type="text" class="form-input" id="buyerAddress" value="서울특별시 강남구 테헤란로 152" placeholder="도로명 주소 또는 지번 주소" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">상세 주소 (동/호수)</label>
+        <input type="text" class="form-input" id="buyerAddressDetail" value="101동 1204호" placeholder="상세 주소를 입력하세요">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">배송 요청사항</label>
+        <select class="form-input" id="buyerMemo">
+          <option value="문 앞에 놓아주세요 (부재 시 연락 바람)">문 앞에 놓아주세요 (부재 시 연락 바람)</option>
+          <option value="배송 전 미리 연락 바랍니다">배송 전 미리 연락 바랍니다</option>
+          <option value="경비실에 맡겨주세요">경비실에 맡겨주세요</option>
+          <option value="택배함에 보관해 주세요">택배함에 보관해 주세요</option>
+        </select>
+      </div>
+
+      <h4 style="font-size:0.95rem; font-weight:700; margin:24px 0 8px; color:var(--color-espresso);">2. 결제 수단 선택</h4>
+      
+      <div class="payment-methods-grid">
+        <div class="pay-method-card selected">
+          <span class="method-icon">💳</span>
+          <span>신용/체크카드</span>
+        </div>
+        <div class="pay-method-card">
+          <span class="method-icon">💛</span>
+          <span>카카오페이</span>
+        </div>
+        <div class="pay-method-card">
+          <span class="method-icon">💙</span>
+          <span>토스페이</span>
+        </div>
+        <div class="pay-method-card">
+          <span class="method-icon">💚</span>
+          <span>네이버페이</span>
+        </div>
+        <div class="pay-method-card">
+          <span class="method-icon">🏦</span>
+          <span>무통장입금(가상계좌)</span>
+        </div>
+        <div class="pay-method-card">
+          <span class="method-icon">⚡️</span>
+          <span>휴대폰 소액결제</span>
+        </div>
+      </div>
+
+      <div class="test-mode-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <span><strong>MVP 안전 모의 결제 모드 활성화</strong>: 실제 과금 없이 주문 접수 및 승인 완료 영수증 발급까지 전체 결제 플로우를 완벽하게 시뮬레이션할 수 있습니다.</span>
+      </div>
+
+      <button type="submit" class="btn-checkout" id="btnDoPayment" style="margin-top:20px; font-size:1.05rem;">
+        결제하기
+      </button>
+    </form>
+  </div>
+
+  <!-- Order Success Receipt Modal -->
+  <div class="success-modal" id="successModal" role="dialog" aria-modal="true">
+    <div class="success-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h3 class="success-title">주문이 성공적으로 완료되었습니다!</h3>
+    <p class="success-desc">NS HOME을 찾아주셔서 감사합니다. 포근한 온기를 정성스럽게 포장하여 보내드리겠습니다.</p>
+
+    <div class="receipt-card" id="receiptDetails">
+      <!-- Injected by app.js -->
+    </div>
+
+    <button class="btn-primary" id="closeSuccessBtn" style="width:100%;">
+      쇼핑 계속하기
+    </button>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Application Scripts -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
