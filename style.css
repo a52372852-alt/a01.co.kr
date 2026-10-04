@@ -271,7 +271,7 @@ img {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-elevated);
-  background: #000;
+  background: #F4EFEA;
   min-height: 520px;
   display: flex;
   align-items: center;
@@ -296,9 +296,10 @@ img {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(25, 20, 18, 0.82) 0%,
-    rgba(25, 20, 18, 0.65) 45%,
-    rgba(25, 20, 18, 0.2) 100%
+    rgba(22, 16, 12, 0.46) 0%,
+    rgba(22, 16, 12, 0.24) 45%,
+    rgba(22, 16, 12, 0.05) 75%,
+    rgba(22, 16, 12, 0.0) 100%
   );
 }
 
@@ -313,16 +314,17 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   font-weight: 600;
-  color: #F8ECE1;
+  color: #FFFFFF;
   margin-bottom: 20px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 .hero-title {
   font-family: var(--font-serif);
@@ -331,18 +333,21 @@ img {
   line-height: 1.15;
   margin-bottom: 18px;
   letter-spacing: -0.01em;
-  color: #FFFDF9;
+  color: #FFFFFF;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 .hero-title em {
   font-style: italic;
-  color: #F3C999;
+  color: #F8D5A3;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 .hero-desc {
   font-size: 1.05rem;
   line-height: 1.65;
-  color: #E2D9D2;
+  color: #FFFFFF;
   margin-bottom: 32px;
-  font-weight: 300;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
 }
 .hero-buttons {
   display: flex;
