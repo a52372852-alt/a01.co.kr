@@ -79,10 +79,13 @@ const btnCopyDataForAi = document.getElementById('btnCopyDataForAi');
 
 // 관리자 이미지 업로드 프리뷰
 const newProdFile = document.getElementById('newProdFile');
+const newProdDetailFiles = document.getElementById('newProdDetailFiles');
 const newProdPresetImage = document.getElementById('newProdPresetImage');
 const newProdImagePreview = document.getElementById('newProdImagePreview');
+const newProdDetailImagesPreview = document.getElementById('newProdDetailImagesPreview');
 const previewImg = document.getElementById('previewImg');
 let uploadedImageBase64 = '';
+let uploadedDetailImagesBase64 = [];
 
 // 1. 초기화
 document.addEventListener('DOMContentLoaded', () => {
@@ -336,6 +339,23 @@ function openProductDetail(productId) {
   modalDesc.textContent = selectedProduct.description || '편안하고 포근한 NS HOME의 엄선 계절 아이템입니다.';
   modalQtyInput.value = 1;
 
+  // 상세페이지 추가 이미지들 렌더링
+  const modalDetailImages = document.getElementById('modalDetailImages');
+  if (modalDetailImages) {
+    if (selectedProduct.detailImages && selectedProduct.detailImages.length > 0) {
+      modalDetailImages.innerHTML = `
+        <h4 style="font-size:0.95rem; font-weight:700; color:var(--color-espresso); margin-top:14px; margin-bottom:8px; border-top:1px solid #F0ECE4; padding-top:14px;">📷 제품 상세 안내 사진</h4>
+        ${selectedProduct.detailImages.map(img => `
+          <img src="${img}" alt="상세 설명 컷" style="width:100%; border-radius:8px; object-fit:contain; box-shadow:0 2px 10px rgba(0,0,0,0.05);" loading="lazy">
+        `).join('')}
+      `;
+      modalDetailImages.style.display = 'flex';
+    } else {
+      modalDetailImages.innerHTML = '';
+      modalDetailImages.style.display = 'none';
+    }
+  }
+
   // 컬러 스와치 생성
   modalSwatches.innerHTML = '';
   colors.forEach((col, idx) => {
@@ -574,8 +594,14 @@ function closeModals() {
   if (detailModal) detailModal.classList.remove('active');
   if (checkoutModal) checkoutModal.classList.remove('active');
   if (successModal) successModal.classList.remove('active');
-  if (adminLoginModal) adminLoginModal.classList.remove('active');
-  if (adminDashboardModal) adminDashboardModal.classList.remove('active');
+  if (adminLoginModal) {
+    adminLoginModal.classList.remove('active');
+    adminLoginModal.style.display = 'none';
+  }
+  if (adminDashboardModal) {
+    adminDashboardModal.classList.remove('active');
+    adminDashboardModal.style.display = 'none';
+  }
   document.body.style.overflow = '';
 }
 
@@ -724,6 +750,29 @@ function setupAdminSystem() {
     });
   }
 
+  // 상세페이지 다중 이미지 업로드 처리
+  if (newProdDetailFiles) {
+    newProdDetailFiles.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      uploadedDetailImagesBase64 = [];
+      if (newProdDetailImagesPreview) newProdDetailImagesPreview.innerHTML = '';
+
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          uploadedDetailImagesBase64.push(event.target.result);
+          if (newProdDetailImagesPreview) {
+            const thumb = document.createElement('img');
+            thumb.src = event.target.result;
+            thumb.style.cssText = 'width:60px; height:60px; object-fit:cover; border-radius:4px; border:1px solid #D8CBB5;';
+            newProdDetailImagesPreview.appendChild(thumb);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  }
+
   // 새 상품 등록 제출
   if (adminAddProductForm) {
     adminAddProductForm.addEventListener('submit', (e) => {
@@ -762,6 +811,7 @@ function setupAdminSystem() {
         rating: 5.0,
         reviewCount: 1,
         images: [finalImg],
+        detailImages: [...uploadedDetailImagesBase64],
         badge: badge,
         tags: ["신상품", season === 'winter' ? "겨울필수" : "여름추천", "포근함"],
         description: desc,
@@ -782,7 +832,9 @@ function setupAdminSystem() {
       renderAdminProductTable();
       adminAddProductForm.reset();
       newProdImagePreview.style.display = 'none';
+      if (newProdDetailImagesPreview) newProdDetailImagesPreview.innerHTML = '';
       uploadedImageBase64 = '';
+      uploadedDetailImagesBase64 = [];
 
       showToast(`신규 상품 "${name}" 이(가) 사이트에 즉시 진열되었습니다!`);
       switchAdminTab('manage');
@@ -805,16 +857,22 @@ function setupAdminSystem() {
 
 function openAdminLogin() {
   closeModals();
-  modalBackdrop.classList.add('active');
-  adminLoginModal.classList.add('active');
+  if (adminLoginModal) {
+    adminLoginModal.style.display = 'block';
+    adminLoginModal.classList.add('active');
+  }
+  if (modalBackdrop) modalBackdrop.classList.add('active');
   document.body.style.overflow = 'hidden';
   if (adminPasswordInput) adminPasswordInput.focus();
 }
 
 function openAdminDashboard() {
   closeModals();
-  modalBackdrop.classList.add('active');
-  adminDashboardModal.classList.add('active');
+  if (adminDashboardModal) {
+    adminDashboardModal.style.display = 'block';
+    adminDashboardModal.classList.add('active');
+  }
+  if (modalBackdrop) modalBackdrop.classList.add('active');
   document.body.style.overflow = 'hidden';
   switchAdminTab('add');
   renderAdminProductTable();

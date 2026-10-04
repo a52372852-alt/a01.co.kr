@@ -1607,6 +1607,7 @@ img {
    Admin Modal & Dashboard Styles
    ========================================================================== */
 .admin-modal {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1623,12 +1624,14 @@ img {
   transition: var(--transition);
 }
 .admin-modal.active {
+  display: block !important;
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   visibility: visible;
 }
 
 .admin-dashboard-modal {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1647,6 +1650,7 @@ img {
   transition: var(--transition);
 }
 .admin-dashboard-modal.active {
+  display: block !important;
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   visibility: visible;

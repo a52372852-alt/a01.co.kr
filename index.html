@@ -8,7 +8,7 @@
   
   <!-- Favicon & Styles -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -381,6 +381,9 @@
           상품 설명
         </p>
 
+        <!-- 상품 상세페이지 이미지 영역 (상세컷 여러 장 세로 나열) -->
+        <div id="modalDetailImages" style="margin: 16px 0; display:flex; flex-direction:column; gap:12px;"></div>
+
         <!-- Options: Color -->
         <div class="option-group">
           <div class="option-label">
@@ -530,7 +533,7 @@
   </div>
 
   <!-- Admin Login Modal -->
-  <div class="admin-modal" id="adminLoginModal" role="dialog" aria-modal="true">
+  <div class="admin-modal" id="adminLoginModal" role="dialog" aria-modal="true" style="display:none;">
     <button class="btn-close-modal" id="closeAdminLoginBtn" aria-label="닫기">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
@@ -554,7 +557,7 @@
   </div>
 
   <!-- Admin Dashboard Modal -->
-  <div class="admin-dashboard-modal" id="adminDashboardModal" role="dialog" aria-modal="true">
+  <div class="admin-dashboard-modal" id="adminDashboardModal" role="dialog" aria-modal="true" style="display:none;">
     <button class="btn-close-modal" id="closeAdminDashboardBtn" aria-label="닫기">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
@@ -616,7 +619,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">상품 대표 사진 * (컴퓨터에서 사진 선택 또는 아래 사진 선택)</label>
+          <label class="form-label">1. 대표 썸네일 사진 * (목록 및 대표 컷)</label>
           <div style="display:flex; gap:10px; align-items:center;">
             <input type="file" id="newProdFile" accept="image/*" class="form-input" style="padding:8px;">
             <span style="font-size:0.8rem; color:#8C8077;">또는 기존 이미지:</span>
@@ -632,6 +635,13 @@
           <div id="newProdImagePreview" style="margin-top:8px; display:none;">
             <img id="previewImg" src="" style="width:100px; height:100px; object-fit:cover; border-radius:6px; border:1px solid #D8CBB5;">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">2. 상세페이지 이미지 (설명란에 들어갈 긴 상세컷 여러 장)</label>
+          <input type="file" id="newProdDetailFiles" accept="image/*" multiple class="form-input" style="padding:8px;">
+          <p style="font-size:0.75rem; color:#8C8077; margin-top:4px;">* 컴퓨터에 있는 상세 설명 이미지 파일들을 한 번에 여러 개 선택할 수 있습니다.</p>
+          <div id="newProdDetailImagesPreview" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;"></div>
         </div>
 
         <div class="form-row">
