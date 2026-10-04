@@ -1602,3 +1602,110 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Admin Modal & Dashboard Styles
+   ========================================================================== */
+.admin-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 90%;
+  max-width: 420px;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  z-index: 210;
+  padding: 36px 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+.admin-modal.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.admin-dashboard-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 92%;
+  max-width: 840px;
+  max-height: 90vh;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  z-index: 211;
+  padding: 36px 32px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+.admin-dashboard-modal.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.admin-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.admin-tab {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+.admin-tab:hover {
+  color: var(--warm-terracotta);
+}
+.admin-tab.active {
+  color: var(--warm-terracotta);
+  border-bottom-color: var(--warm-terracotta);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.admin-table th {
+  background: #FAF7F2;
+  padding: 10px 12px;
+  text-align: left;
+  color: var(--color-espresso);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+}
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: middle;
+}
+.btn-delete-prod {
+  background: #FFEBEB;
+  color: #E63946;
+  border: 1px solid #FFCDD2;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-delete-prod:hover {
+  background: #E63946;
+  color: #FFFFFF;
+}
