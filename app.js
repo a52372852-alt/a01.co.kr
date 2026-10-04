@@ -280,11 +280,6 @@ function renderProducts() {
         <h3 class="product-name" onclick="openProductDetail('${product.id}')">${product.name}</h3>
         <p class="product-sub">${product.subtitle || ''}</p>
 
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <strong>${(product.rating || 4.9).toFixed(1)}</strong>
-          <span class="review-count">(${((product.reviewCount || 120)).toLocaleString()}개 리뷰)</span>
-        </div>
 
         <div class="product-price-row">
           <div class="price-block">
@@ -332,7 +327,7 @@ function openProductDetail(productId) {
   modalBadge.textContent = selectedProduct.badge || 'BEST';
   modalTitle.textContent = selectedProduct.name;
   modalSubtitle.textContent = selectedProduct.subtitle || '';
-  modalRating.textContent = `${(selectedProduct.rating || 4.9).toFixed(1)} (${(selectedProduct.reviewCount || 100).toLocaleString()} 리뷰)`;
+  if (modalRating) modalRating.textContent = '';
   modalDesc.textContent = selectedProduct.description || '편안하고 포근한 NS HOME의 엄선 계절 아이템입니다.';
   modalQtyInput.value = 1;
 
