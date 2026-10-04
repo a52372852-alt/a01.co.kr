@@ -260,22 +260,6 @@ img {
   border: 2px solid #FFFFFF;
 }
 
-.btn-coupang-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #E63946;
-  color: #FFFFFF;
-  padding: 9px 16px;
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.25);
-}
-.btn-coupang-nav:hover {
-  background: #D32534;
-  transform: translateY(-1px);
-}
 
 /* Hero Section */
 .hero-section {
@@ -553,9 +537,6 @@ img {
   letter-spacing: 0.03em;
   z-index: 2;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-.badge-coupang {
-  background: #E63946;
 }
 .badge-summer {
   background: var(--accent-cool);
