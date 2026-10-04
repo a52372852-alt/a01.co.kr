@@ -3,11 +3,10 @@ const PRODUCTS = [
   {
     id: "ns-blanket-fluffy",
     name: "NS 프리미엄 웜 플리스 극세사 담요",
-    subtitle: "쿠팡 판매 베스트셀러 • 닿는 순간 차오르는 극상의 포근함",
+    subtitle: "NS 시그니처 베스트셀러 • 닿는 순간 차오르는 극상의 포근함",
     season: "winter",
     isBest: true,
     isNew: true,
-    coupangUrl: "https://www.coupang.com/vp/products/9748731700?itemId=29188981921&vendorItemId=96109969727&q=ns%EB%8B%B4%EC%9A%94",
     price: 38900,
     originalPrice: 59000,
     discountRate: 34,
@@ -17,7 +16,7 @@ const PRODUCTS = [
       "images/blanket_fluffy.jpg",
       "images/hero.jpg"
     ],
-    badge: "쿠팡 1위 베스트",
+    badge: "시그니처 1위",
     tags: ["양면 극세사", "정전기 방지", "초경량 보온", "간편 기계세탁"],
     description: "NS HOME의 시그니처 웜 플리스 담요는 고밀도 마이크로화이버 극세사 원단으로 제작되어 털 빠짐 없이 부드럽고 가볍게 체온을 유지해 줍니다. 찬 공기는 차단하고 체온을 가두는 에어셀 구조로 올겨울 당신의 휴식을 따스하게 안아드립니다.",
     colors: [
@@ -174,16 +173,16 @@ const PRODUCTS = [
 // 고객 실제 리뷰 데이터
 const REVIEWS = [
   {
-    author: "김*진 님 (쿠팡 실구매자)",
+    author: "김*진 님 (공식몰 실구매자)",
     product: "NS 프리미엄 웜 플리스 극세사 담요",
     rating: 5,
     date: "2024.11.02",
     title: "보들보들함이 차원이 달라요! 털 빠짐 전혀 없음",
-    content: "추위를 많이 타서 쿠팡에서 리뷰 보고 샀는데 진짜 살결 닿는 순간 온기가 확 올라와요. 세탁기 돌려도 털 뭉침이나 빠짐 1도 없고 테라코타 색감 너무 감성적입니다. 거실 소파에 두니 카페 같아요.",
+    content: "추위를 많이 타서 추천 후기 보고 샀는데 진짜 살결 닿는 순간 온기가 확 올라와요. 세탁기 돌려도 털 뭉침이나 빠짐 1도 없고 테라코타 색감 너무 감성적입니다. 거실 소파에 두니 카페 같아요.",
     verified: true
   },
   {
-    author: "박*연 님 (자사몰 구매자)",
+    author: "박*연 님 (공식몰 구매자)",
     product: "NS 시그니처 캐시미어 울 블랭킷",
     rating: 5,
     date: "2024.11.18",
@@ -192,7 +191,7 @@ const REVIEWS = [
     verified: true
   },
   {
-    author: "이*호 님 (쿠팡 실구매자)",
+    author: "이*호 님 (공식몰 실구매자)",
     product: "NS 올데이 암막 초경량 린넨 양우산",
     rating: 5,
     date: "2024.08.10",

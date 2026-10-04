@@ -258,8 +258,7 @@ function renderProducts() {
     
     // 배지 스타일
     let badgeClass = 'badge-float';
-    if (product.coupangUrl) badgeClass += ' badge-coupang';
-    else if (product.season === 'summer') badgeClass += ' badge-summer';
+    if (product.season === 'summer') badgeClass += ' badge-summer';
 
     const firstImg = (product.images && product.images.length > 0) ? product.images[0] : 'images/blanket_fluffy.jpg';
 
@@ -300,11 +299,9 @@ function renderProducts() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
             장바구니 담기
           </button>
-          ${product.coupangUrl ? `
-            <a href="${product.coupangUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-coupang" title="쿠팡에서 상품 보기">
-              쿠팡 바로가기 ↗
-            </a>
-          ` : ''}
+          <button class="btn-card-detail" onclick="openProductDetail('${product.id}')">
+            상세보기
+          </button>
         </div>
       </div>
     `;
@@ -786,7 +783,6 @@ function setupAdminSystem() {
       const originalPrice = parseInt(document.getElementById('newProdOriginalPrice').value, 10) || Math.round(price * 1.4);
       const discountRate = Math.round(((originalPrice - price) / originalPrice) * 100);
 
-      const coupangUrl = document.getElementById('newProdCoupang').value.trim();
       const desc = document.getElementById('newProdDesc').value.trim() || 'NS HOME 프리미엄 감성 라이프스타일 상품입니다.';
 
       const colorsRaw = document.getElementById('newProdColors').value.split(',');
@@ -804,7 +800,6 @@ function setupAdminSystem() {
         season: season,
         isBest: false,
         isNew: true,
-        coupangUrl: coupangUrl,
         price: price,
         originalPrice: originalPrice,
         discountRate: discountRate,

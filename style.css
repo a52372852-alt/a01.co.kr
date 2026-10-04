@@ -682,7 +682,7 @@ img {
 
 .card-actions {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 8px;
   margin-top: 16px;
 }
@@ -692,7 +692,7 @@ img {
   color: var(--color-espresso);
   font-weight: 600;
   font-size: 0.88rem;
-  padding: 10px 16px;
+  padding: 10px 14px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -706,21 +706,23 @@ img {
   border-color: var(--warm-terracotta);
 }
 
-.btn-card-coupang {
-  background: #FFF0F2;
-  color: #E63946;
-  border: 1px solid #FFCCD2;
+.btn-card-detail {
+  background: #FFFFFF;
+  color: var(--color-mocha);
+  border: 1px solid var(--color-border);
   padding: 10px 14px;
   border-radius: var(--radius-sm);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  transition: var(--transition);
 }
-.btn-card-coupang:hover {
-  background: #E63946;
-  color: #FFFFFF;
+.btn-card-detail:hover {
+  border-color: var(--warm-terracotta);
+  color: var(--warm-terracotta);
+  background: var(--warm-terracotta-light);
 }
 
 /* Brand Story Section */
