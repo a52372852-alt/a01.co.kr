@@ -685,7 +685,6 @@ function renderProducts() {
 
         <div class="product-price-row">
           <div class="price-block">
-            <span class="price-label-badge">정상가</span>
             <div class="final-price">${(product.price || 0).toLocaleString()}<span>원</span></div>
           </div>
         </div>
@@ -1397,6 +1396,37 @@ function renderAdminProductTable() {
   `;
 }
 
+// 상품 수정 시 상세 이미지 관리 임시 배열
+let currentEditingDetailImages = [];
+
+// 상세 이미지 목록 미리보기 렌더링
+function renderEditDetailImagesList() {
+  const container = document.getElementById('editDetailImagesList');
+  const countEl = document.getElementById('editDetailCount');
+  if (!container) return;
+
+  if (countEl) countEl.textContent = currentEditingDetailImages.length;
+
+  if (currentEditingDetailImages.length === 0) {
+    container.innerHTML = '<p style="color:#A3968E; font-size:0.8rem; width:100%; text-align:center; padding:16px 0;">등록된 상세 안내 이미지가 없습니다. 아래 [➕ 추가] 버튼을 눌러 사진을 등록하세요.</p>';
+    return;
+  }
+
+  container.innerHTML = currentEditingDetailImages.map((imgSrc, idx) => `
+    <div style="position:relative; width:80px; height:105px; border-radius:6px; overflow:hidden; border:1px solid #D5CECE; background:#FAF7F2; flex-shrink:0;">
+      <img src="${imgSrc}" alt="상세컷 ${idx + 1}" style="width:100%; height:100%; object-fit:cover;">
+      <span style="position:absolute; bottom:3px; left:4px; font-size:10px; font-weight:700; background:rgba(0,0,0,0.65); color:#FFF; padding:1px 5px; border-radius:3px;">#${idx + 1}</span>
+      <button type="button" onclick="removeEditDetailImage(${idx})" title="이 이미지 삭제" style="position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; background:#E63946; color:#FFF; border:none; cursor:pointer; font-size:11px; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.3);">✕</button>
+    </div>
+  `).join('');
+}
+
+// 특정 상세 이미지 1장 삭제
+window.removeEditDetailImage = function(index) {
+  currentEditingDetailImages.splice(index, 1);
+  renderEditDetailImagesList();
+};
+
 // 상품 수정 모달 열기
 window.openEditProductModal = function(id) {
   const all = getAllProducts();
@@ -1412,7 +1442,18 @@ window.openEditProductModal = function(id) {
   document.getElementById('editProdPrice').value = prod.price || 0;
   document.getElementById('editProdBadge').value = prod.badge || '';
   document.getElementById('editProdSeason').value = prod.season || 'winter';
-  document.getElementById('editProdImage').value = (prod.images && prod.images[0]) || '';
+
+  const thumbImg = (prod.images && prod.images[0]) || '';
+  document.getElementById('editProdImage').value = thumbImg;
+  const thumbPreview = document.getElementById('editProdThumbPreview');
+  if (thumbPreview) {
+    thumbPreview.src = thumbImg || 'images/blanket_fluffy.jpg';
+  }
+
+  // 상세 이미지 배열 복사 및 렌더링
+  currentEditingDetailImages = [...(prod.detailImages || [])];
+  renderEditDetailImagesList();
+
   document.getElementById('editProdColors').value = (prod.colors || []).map(c => c.name).join(', ');
   document.getElementById('editProdSizes').value = (prod.sizes || []).map(s => s.name).join(', ');
   document.getElementById('editProdDesc').value = prod.description || '';
@@ -1420,6 +1461,87 @@ window.openEditProductModal = function(id) {
   modal.style.display = 'block';
   modal.classList.add('active');
 };
+
+// 썸네일 직접 파일 업로드 핸들러
+const editProdThumbFile = document.getElementById('editProdThumbFile');
+if (editProdThumbFile) {
+  editProdThumbFile.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (re) => {
+      const dataUrl = re.target.result;
+      const preview = document.getElementById('editProdThumbPreview');
+      if (preview) preview.src = dataUrl;
+      const imgInput = document.getElementById('editProdImage');
+      if (imgInput) imgInput.value = dataUrl;
+      const fileNameEl = document.getElementById('editThumbFileName');
+      if (fileNameEl) fileNameEl.textContent = file.name;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// 썸네일 이미지 삭제 버튼
+const btnRemoveEditThumb = document.getElementById('btnRemoveEditThumb');
+if (btnRemoveEditThumb) {
+  btnRemoveEditThumb.addEventListener('click', () => {
+    const preview = document.getElementById('editProdThumbPreview');
+    if (preview) preview.src = '';
+    const imgInput = document.getElementById('editProdImage');
+    if (imgInput) imgInput.value = '';
+    const fileInput = document.getElementById('editProdThumbFile');
+    if (fileInput) fileInput.value = '';
+    const fileNameEl = document.getElementById('editThumbFileName');
+    if (fileNameEl) fileNameEl.textContent = '썸네일 삭제됨';
+  });
+}
+
+// 썸네일 경로 input 수동 입력 시 미리보기 반영
+const editProdImageInput = document.getElementById('editProdImage');
+if (editProdImageInput) {
+  editProdImageInput.addEventListener('input', (e) => {
+    const preview = document.getElementById('editProdThumbPreview');
+    if (preview) preview.src = e.target.value;
+  });
+}
+
+// 새 상세페이지 파일 다중 추가 업로드 핸들러
+const editDetailFilesInput = document.getElementById('editDetailFilesInput');
+if (editDetailFilesInput) {
+  editDetailFilesInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    if (!files || files.length === 0) return;
+
+    let loadedCount = 0;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (re) => {
+        currentEditingDetailImages.push(re.target.result);
+        loadedCount++;
+        if (loadedCount === files.length) {
+          renderEditDetailImagesList();
+          editDetailFilesInput.value = '';
+          showToast(`${files.length}장의 상세 이미지가 추가되었습니다.`);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+}
+
+// 상세 이미지 전체 삭제 버튼
+const btnClearAllDetailImages = document.getElementById('btnClearAllDetailImages');
+if (btnClearAllDetailImages) {
+  btnClearAllDetailImages.addEventListener('click', () => {
+    if (currentEditingDetailImages.length === 0) return;
+    if (confirm('등록된 상세 이미지를 모두 삭제하시겠습니까?')) {
+      currentEditingDetailImages = [];
+      renderEditDetailImagesList();
+      showToast('상세 이미지가 모두 삭제되었습니다.');
+    }
+  });
+}
 
 // 상품 수정 모달 닫기
 function closeAdminEditModal() {
@@ -1468,14 +1590,17 @@ if (adminEditProductForm) {
       season,
       description: desc,
       colors,
-      sizes
+      sizes,
+      detailImages: [...currentEditingDetailImages]
     };
 
     if (mainImg) {
       updatedData.images = [mainImg, ...(targetProd.images ? targetProd.images.slice(1) : [])];
+    } else {
+      updatedData.images = [];
     }
 
-    // localStorage에 수정사항 저장
+    // localStorage에 수정사항 영구 저장
     editedProductsMap[id] = { ...(editedProductsMap[id] || {}), ...updatedData };
     localStorage.setItem('ns_edited_products', JSON.stringify(editedProductsMap));
 
@@ -1489,7 +1614,7 @@ if (adminEditProductForm) {
     closeAdminEditModal();
     renderProducts();
     renderAdminProductTable();
-    showToast(`'${name}' 상품 정보가 수정되었습니다.`);
+    showToast(`'${name}' 상품 정보(썸네일/상세이미지)가 성공적으로 저장되었습니다.`);
   });
 }
 
