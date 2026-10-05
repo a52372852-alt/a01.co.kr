@@ -1,18 +1,17 @@
 // NS HOME 계절 상품 데이터베이스 (총 6개 라인업)
 const PRODUCTS = [
   {
-    id: "ns-knee-blanket-beige",
-    name: "NS 코지 극세사 무릎담요 (코지 베이지)",
-    subtitle: "닿는 순간 차오르는 따스함 • 100x150cm 감성 포근 무릎담요",
+    id: "ns-knee-blanket-gray",
+    name: "NS 코지 극세사 무릎담요 (코지 그레이)",
+    subtitle: "모던하고 차분한 북유럽 무드 • 100x150cm 감성 포근 무릎담요",
     season: "winter",
     isBest: true,
     isNew: true,
     price: 26000,
-    rating: 4.95,
-    reviewCount: 382,
+    rating: 4.98,
+    reviewCount: 426,
     images: [
-      "images/blanket_cozy_beige.jpg",
-      "images/blanket_cozy_all.jpg"
+      "images/blanket_knee_thumb.jpg"
     ],
     detailImages: [
       "images/detail/knee_blanket_01.png",
@@ -21,12 +20,12 @@ const PRODUCTS = [
       "images/detail/knee_blanket_04.png",
       "images/detail/knee_blanket_option.png"
     ],
-    badge: "베스트 추천",
-    tags: ["무릎담요", "극세사섬유", "코지베이지", "기계세탁", "사무실/소파용"],
-    description: "NS HOME 3 COLORS LAP BLANKET 컬렉션의 대표 컬러 코지 베이지입니다. 촘촘하고 부드러운 극세사 섬유 사이에 미세한 공기층이 형성되어 몸 주변의 온기를 붙잡아 따뜻하게 감싸줍니다. 거실 소파, 사무실, 학교 등 머무는 곳 어디서나 가볍고 포근하게 체온을 지켜줍니다.",
+    badge: "베스트 1위",
+    tags: ["무릎담요", "극세사섬유", "코지그레이", "차량/캠핑용", "사무실/소파용"],
+    description: "어떤 인테리어에도 세련되게 어울리는 코지 그레이 컬러입니다. 털 빠짐 없이 부드럽고 가벼우며, 랩탑 작업이나 독서, 차박 및 캠핑 시 간편하게 둘러주기 가장 알맞은 볼륨감으로 제작되었습니다.",
     colors: [
-      { name: "코지 베이지", hex: "#EAE0D0", extraPrice: 0 },
       { name: "코지 그레이", hex: "#C7C9CC", extraPrice: 0 },
+      { name: "코지 베이지", hex: "#EAE0D0", extraPrice: 0 },
       { name: "코지 블루", hex: "#8DA4C4", extraPrice: 0 }
     ],
     sizes: [
@@ -41,19 +40,17 @@ const PRODUCTS = [
     ]
   },
   {
-    id: "ns-knee-blanket-gray",
-    name: "NS 코지 극세사 무릎담요 (코지 그레이)",
-    subtitle: "모던하고 차분한 북유럽 무드 • 100x150cm 감성 포근 무릎담요",
+    id: "ns-knee-blanket-beige",
+    name: "NS 코지 극세사 무릎담요 (코지 베이지)",
+    subtitle: "닿는 순간 차오르는 따스함 • 100x150cm 감성 포근 무릎담요",
     season: "winter",
     isBest: true,
     isNew: true,
     price: 26000,
-    rating: 4.92,
-    reviewCount: 294,
+    rating: 4.95,
+    reviewCount: 382,
     images: [
-      "images/blanket_cozy_gray.jpg",
-      "images/blanket_cozy_gray_pet.jpg",
-      "images/blanket_cozy_all.jpg"
+      "images/blanket_knee_thumb.jpg"
     ],
     detailImages: [
       "images/detail/knee_blanket_01.png",
@@ -62,12 +59,12 @@ const PRODUCTS = [
       "images/detail/knee_blanket_04.png",
       "images/detail/knee_blanket_option.png"
     ],
-    badge: "인기 컬러",
-    tags: ["무릎담요", "극세사섬유", "코지그레이", "차량/캠핑용", "반려동물소파"],
-    description: "어떤 인테리어에도 세련되게 어울리는 코지 그레이 컬러입니다. 털 빠짐 없이 부드럽고 가벼우며, 랩탑 작업이나 독서, 차박 및 캠핑 시 간편하게 둘러주기 가장 알맞은 볼륨감으로 제작되었습니다.",
+    badge: "인기 추천",
+    tags: ["무릎담요", "극세사섬유", "코지베이지", "기계세탁", "사무실/소파용"],
+    description: "NS HOME 3 COLORS LAP BLANKET 컬렉션의 대표 컬러 코지 베이지입니다. 촘촘하고 부드러운 극세사 섬유 사이에 미세한 공기층이 형성되어 몸 주변의 온기를 붙잡아 따뜻하게 감싸줍니다. 거실 소파, 사무실, 학교 등 머무는 곳 어디서나 가볍고 포근하게 체온을 지켜줍니다.",
     colors: [
-      { name: "코지 그레이", hex: "#C7C9CC", extraPrice: 0 },
       { name: "코지 베이지", hex: "#EAE0D0", extraPrice: 0 },
+      { name: "코지 그레이", hex: "#C7C9CC", extraPrice: 0 },
       { name: "코지 블루", hex: "#8DA4C4", extraPrice: 0 }
     ],
     sizes: [
@@ -92,8 +89,7 @@ const PRODUCTS = [
     rating: 4.9,
     reviewCount: 185,
     images: [
-      "images/blanket_cozy_blue.jpg",
-      "images/blanket_cozy_all.jpg"
+      "images/blanket_knee_thumb.jpg"
     ],
     detailImages: [
       "images/detail/knee_blanket_01.png",

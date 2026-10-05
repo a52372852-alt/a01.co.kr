@@ -709,10 +709,12 @@ function openProductDetail(productId) {
   currentOption.size = sizes[0];
 
   const mainImgUrl = selectedProduct.images && selectedProduct.images[0] ? selectedProduct.images[0] : 'images/blanket_fluffy.jpg';
-  modalImg.src = mainImgUrl;
-  modalImg.alt = selectedProduct.name;
+  if (modalImg) {
+    modalImg.src = mainImgUrl;
+    modalImg.alt = selectedProduct.name;
+  }
 
-  // 갤러리 서브 썸네일 렌더링
+  // 갤러리 서브 썸네일 렌더링 (필요 시)
   if (modalGalleryThumbs) {
     const allImages = [...(selectedProduct.images || [])];
     if (allImages.length > 1) {
@@ -726,12 +728,12 @@ function openProductDetail(productId) {
     }
   }
 
-  modalBadge.textContent = selectedProduct.badge || 'BEST';
-  modalTitle.textContent = selectedProduct.name;
-  modalSubtitle.textContent = selectedProduct.subtitle || '';
+  if (modalBadge) modalBadge.textContent = selectedProduct.badge || 'BEST';
+  if (modalTitle) modalTitle.textContent = selectedProduct.name;
+  if (modalSubtitle) modalSubtitle.textContent = selectedProduct.subtitle || '';
   if (modalRating) modalRating.textContent = '';
-  modalDesc.textContent = selectedProduct.description || '편안하고 포근한 NS HOME의 엄선 계절 아이템입니다.';
-  modalQtyInput.value = 1;
+  if (modalDesc) modalDesc.textContent = selectedProduct.description || '편안하고 포근한 NS HOME의 엄선 계절 아이템입니다.';
+  if (modalQtyInput) modalQtyInput.value = 1;
 
   // 탭을 기본 '상품소개'로 리셋
   const tabBtns = document.querySelectorAll('.modal-tab-btn');
@@ -742,16 +744,13 @@ function openProductDetail(productId) {
     p.style.display = p.id === 'tabDesc' ? 'block' : 'none';
   });
 
-  // 상세페이지 추가 이미지들 렌더링
+  // 860px 상세페이지 이미지 무왜곡 순차 세로 배치
   const modalDetailImages = document.getElementById('modalDetailImages');
   if (modalDetailImages) {
     if (selectedProduct.detailImages && selectedProduct.detailImages.length > 0) {
-      modalDetailImages.innerHTML = `
-        <h4 style="font-size:0.95rem; font-weight:700; color:var(--color-espresso); margin-top:14px; margin-bottom:8px; border-top:1px solid #F0ECE4; padding-top:14px;">📷 제품 상세 안내 사진</h4>
-        ${selectedProduct.detailImages.map(img => `
-          <img src="${img}" alt="상세 설명 컷" style="width:100%; border-radius:8px; object-fit:contain; box-shadow:0 2px 10px rgba(0,0,0,0.05);" loading="lazy">
-        `).join('')}
-      `;
+      modalDetailImages.innerHTML = selectedProduct.detailImages.map((img, idx) => `
+        <img src="${img}" alt="${selectedProduct.name} 상세페이지 ${idx + 1}" loading="lazy" style="width:100%; max-width:860px; height:auto; display:block; margin:0 auto;">
+      `).join('');
       modalDetailImages.style.display = 'flex';
     } else {
       modalDetailImages.innerHTML = '';
