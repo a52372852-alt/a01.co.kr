@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -773,6 +773,81 @@
     </div>
   </div>
 
+  <!-- Admin Edit Product Modal (상품 수정 모달) -->
+  <div class="admin-edit-modal" id="adminEditModal" role="dialog" aria-modal="true" style="display:none;">
+    <button class="btn-close-modal" id="closeAdminEditBtn" aria-label="닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div style="margin-bottom:20px; border-bottom:1px solid #E8E0D5; padding-bottom:12px;">
+      <h3 style="font-size:1.4rem; color:var(--color-espresso); font-weight:700;">✏️ 상품 정보 수정</h3>
+      <p style="font-size:0.83rem; color:var(--color-muted); margin-top:4px;">상품명, 가격, 옵션, 설명 등을 수정하면 사이트에 즉시 반영됩니다.</p>
+    </div>
+    <form id="adminEditProductForm">
+      <input type="hidden" id="editProdId">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">상품명 *</label>
+          <input type="text" class="form-input" id="editProdName" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">한줄 서브타이틀</label>
+          <input type="text" class="form-input" id="editProdSubtitle">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">판매가 (원) *</label>
+          <input type="number" class="form-input" id="editProdPrice" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">배지 라벨</label>
+          <input type="text" class="form-input" id="editProdBadge">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">시즌 카테고리</label>
+          <select class="form-input" id="editProdSeason">
+            <option value="winter">❄️ 윈터 담요 컬렉션</option>
+            <option value="summer">☀️ 서머 아카이브</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">대표 썸네일 이미지 경로</label>
+          <input type="text" class="form-input" id="editProdImage" placeholder="예: images/sofa_bed_cream_beige.jpg">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">색상 옵션 (쉼표로 구분)</label>
+          <input type="text" class="form-input" id="editProdColors" placeholder="색상1, 색상2">
+        </div>
+        <div class="form-group">
+          <label class="form-label">사이즈 옵션 (쉼표로 구분)</label>
+          <input type="text" class="form-input" id="editProdSizes" placeholder="사이즈1, 사이즈2">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">상세 설명</label>
+        <textarea class="form-input" id="editProdDesc" rows="3"></textarea>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button type="submit" class="btn-primary" style="flex:2; padding:14px; font-weight:700;">
+          💾 수정사항 저장하기
+        </button>
+        <button type="button" class="btn-modal-cart" id="btnCancelEdit" style="flex:1; padding:14px;">
+          취소
+        </button>
+      </div>
+    </form>
+  </div>
+
   <!-- Order Lookup Modal (비회원 주문 / 배송 조회) -->
   <div class="lookup-modal" id="orderLookupModal" role="dialog" aria-modal="true" style="display:none;">
     <button class="btn-close-modal" id="closeOrderLookupBtn" aria-label="닫기">
@@ -888,7 +963,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- Application Scripts -->
-  <script src="products.js?v=7"></script>
-  <script src="app.js?v=7"></script>
+  <script src="products.js?v=8"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>

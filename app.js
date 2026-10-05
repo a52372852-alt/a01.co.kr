@@ -14,10 +14,27 @@ let currentOption = {
   size: null
 };
 
-// 모든 상품 데이터 조회 (공식 기본 상품 6개 최우선 + 커스텀 등록 상품)
+// 수정된 상품 정보 저장소 (localStorage)
+let editedProductsMap = JSON.parse(localStorage.getItem('ns_edited_products') || '{}');
+
+// 모든 상품 데이터 조회 (공식 기본 상품 + 수정사항 병합 + 커스텀 등록 상품)
 function getAllProducts() {
-  const customFiltered = customProducts.filter(cp => !PRODUCTS.some(p => p.id === cp.id));
-  return [...PRODUCTS, ...customFiltered];
+  const base = PRODUCTS.map(p => {
+    if (editedProductsMap[p.id]) {
+      return { ...p, ...editedProductsMap[p.id] };
+    }
+    return p;
+  });
+
+  const customList = customProducts.map(cp => {
+    if (editedProductsMap[cp.id]) {
+      return { ...cp, ...editedProductsMap[cp.id] };
+    }
+    return cp;
+  });
+
+  const customFiltered = customList.filter(cp => !base.some(p => p.id === cp.id));
+  return [...base, ...customFiltered];
 }
 
 // DOM Elements 캐시
@@ -1011,6 +1028,11 @@ function closeModals() {
     adminDashboardModal.classList.remove('active');
     adminDashboardModal.style.display = 'none';
   }
+  const adminEditModal = document.getElementById('adminEditModal');
+  if (adminEditModal) {
+    adminEditModal.classList.remove('active');
+    adminEditModal.style.display = 'none';
+  }
   document.body.style.overflow = '';
 }
 
@@ -1355,7 +1377,7 @@ function renderAdminProductTable() {
         ${all.map(p => `
           <tr>
             <td>
-              <img src="${p.images[0]}" style="width:48px; height:48px; object-fit:cover; border-radius:4px; border:1px solid #E8E0D5;">
+              <img src="${(p.images && p.images[0]) ? p.images[0] : 'images/blanket_fluffy.jpg'}" style="width:48px; height:48px; object-fit:cover; border-radius:4px; border:1px solid #E8E0D5;">
             </td>
             <td>
               <strong>${p.name}</strong><br>
@@ -1363,19 +1385,122 @@ function renderAdminProductTable() {
             </td>
             <td>${p.season === 'winter' ? '❄️ 겨울' : '☀️ 여름'}</td>
             <td><strong>${p.price.toLocaleString()}원</strong></td>
-            <td>${p.isCustom ? '<span style="color:#A45938; font-weight:700;">직접 등록</span>' : '<span style="color:#8C8077;">기본 상품</span>'}</td>
-            <td>
-              ${p.isCustom ? `
-                <button type="button" class="btn-delete-prod" onclick="deleteCustomProduct('${p.id}')">삭제</button>
-              ` : `
-                <button type="button" class="btn-delete-prod" onclick="deleteCustomProduct('${p.id}')" title="숨기기">삭제</button>
-              `}
+            <td>${p.isCustom ? '<span style="color:#A45938; font-weight:700;">직접 등록</span>' : (editedProductsMap[p.id] ? '<span style="color:#1E6091; font-weight:700;">수정됨</span>' : '<span style="color:#8C8077;">기본 상품</span>')}</td>
+            <td style="white-space:nowrap;">
+              <button type="button" class="btn-edit-prod" onclick="openEditProductModal('${p.id}')">수정</button>
+              <button type="button" class="btn-delete-prod" onclick="deleteCustomProduct('${p.id}')">삭제</button>
             </td>
           </tr>
         `).join('')}
       </tbody>
     </table>
   `;
+}
+
+// 상품 수정 모달 열기
+window.openEditProductModal = function(id) {
+  const all = getAllProducts();
+  const prod = all.find(p => p.id === id);
+  if (!prod) return;
+
+  const modal = document.getElementById('adminEditModal');
+  if (!modal) return;
+
+  document.getElementById('editProdId').value = prod.id;
+  document.getElementById('editProdName').value = prod.name || '';
+  document.getElementById('editProdSubtitle').value = prod.subtitle || '';
+  document.getElementById('editProdPrice').value = prod.price || 0;
+  document.getElementById('editProdBadge').value = prod.badge || '';
+  document.getElementById('editProdSeason').value = prod.season || 'winter';
+  document.getElementById('editProdImage').value = (prod.images && prod.images[0]) || '';
+  document.getElementById('editProdColors').value = (prod.colors || []).map(c => c.name).join(', ');
+  document.getElementById('editProdSizes').value = (prod.sizes || []).map(s => s.name).join(', ');
+  document.getElementById('editProdDesc').value = prod.description || '';
+
+  modal.style.display = 'block';
+  modal.classList.add('active');
+};
+
+// 상품 수정 모달 닫기
+function closeAdminEditModal() {
+  const modal = document.getElementById('adminEditModal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
+}
+
+// 상품 수정 폼 서브밋 이벤트
+const adminEditProductForm = document.getElementById('adminEditProductForm');
+if (adminEditProductForm) {
+  adminEditProductForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = document.getElementById('editProdId').value;
+    const all = getAllProducts();
+    const targetProd = all.find(p => p.id === id);
+    if (!targetProd) return;
+
+    const name = document.getElementById('editProdName').value.trim();
+    const subtitle = document.getElementById('editProdSubtitle').value.trim();
+    const price = parseInt(document.getElementById('editProdPrice').value, 10) || 0;
+    const badge = document.getElementById('editProdBadge').value.trim();
+    const season = document.getElementById('editProdSeason').value;
+    const mainImg = document.getElementById('editProdImage').value.trim();
+    const colorsRaw = document.getElementById('editProdColors').value.trim();
+    const sizesRaw = document.getElementById('editProdSizes').value.trim();
+    const desc = document.getElementById('editProdDesc').value.trim();
+
+    // 색상 옵션 파싱
+    const colors = colorsRaw
+      ? colorsRaw.split(',').map(s => s.trim()).filter(Boolean).map(s => ({ name: s, hex: '#C7C9CC', extraPrice: 0 }))
+      : (targetProd.colors || [{ name: '단일 색상', hex: '#C7C9CC', extraPrice: 0 }]);
+
+    // 사이즈 옵션 파싱
+    const sizes = sizesRaw
+      ? sizesRaw.split(',').map(s => s.trim()).filter(Boolean).map(s => ({ name: s, extraPrice: 0 }))
+      : (targetProd.sizes || [{ name: '기본 사이즈', extraPrice: 0 }]);
+
+    const updatedData = {
+      name,
+      subtitle,
+      price,
+      badge,
+      season,
+      description: desc,
+      colors,
+      sizes
+    };
+
+    if (mainImg) {
+      updatedData.images = [mainImg, ...(targetProd.images ? targetProd.images.slice(1) : [])];
+    }
+
+    // localStorage에 수정사항 저장
+    editedProductsMap[id] = { ...(editedProductsMap[id] || {}), ...updatedData };
+    localStorage.setItem('ns_edited_products', JSON.stringify(editedProductsMap));
+
+    // 커스텀 상품인 경우 커스텀 목록도 갱신
+    const customIdx = customProducts.findIndex(p => p.id === id);
+    if (customIdx !== -1) {
+      customProducts[customIdx] = { ...customProducts[customIdx], ...updatedData };
+      localStorage.setItem('ns_custom_products', JSON.stringify(customProducts));
+    }
+
+    closeAdminEditModal();
+    renderProducts();
+    renderAdminProductTable();
+    showToast(`'${name}' 상품 정보가 수정되었습니다.`);
+  });
+}
+
+// 수정 모달 닫기 버튼 이벤트
+const closeAdminEditBtn = document.getElementById('closeAdminEditBtn');
+if (closeAdminEditBtn) {
+  closeAdminEditBtn.addEventListener('click', closeAdminEditModal);
+}
+const btnCancelEdit = document.getElementById('btnCancelEdit');
+if (btnCancelEdit) {
+  btnCancelEdit.addEventListener('click', closeAdminEditModal);
 }
 
 // 상품 삭제
@@ -1391,6 +1516,12 @@ window.deleteCustomProduct = function(id) {
     if (idx !== -1) {
       PRODUCTS.splice(idx, 1);
     }
+  }
+
+  // 수정 내역에서도 제거
+  if (editedProductsMap[id]) {
+    delete editedProductsMap[id];
+    localStorage.setItem('ns_edited_products', JSON.stringify(editedProductsMap));
   }
 
   renderProducts();
