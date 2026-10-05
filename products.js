@@ -14,7 +14,7 @@ const PRODUCTS = [
       "images/blanket_knee_thumb.jpg"
     ],
     detailImages: [
-      "images/detail/knee_detail_01.png",
+      "images/detail/knee_detail_01_v2.png",
       "images/detail/knee_detail_02.png",
       "images/detail/knee_detail_03.png",
       "images/detail/knee_detail_04.png",
@@ -54,7 +54,7 @@ const PRODUCTS = [
       "images/blanket_knee_thumb.jpg"
     ],
     detailImages: [
-      "images/detail/knee_detail_01.png",
+      "images/detail/knee_detail_01_v2.png",
       "images/detail/knee_detail_02.png",
       "images/detail/knee_detail_03.png",
       "images/detail/knee_detail_04.png",
@@ -94,7 +94,7 @@ const PRODUCTS = [
       "images/blanket_knee_thumb.jpg"
     ],
     detailImages: [
-      "images/detail/knee_detail_01.png",
+      "images/detail/knee_detail_01_v2.png",
       "images/detail/knee_detail_02.png",
       "images/detail/knee_detail_03.png",
       "images/detail/knee_detail_04.png",
