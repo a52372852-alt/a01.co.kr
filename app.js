@@ -56,6 +56,12 @@ const btnClearRecent = document.getElementById('btnClearRecent');
 const btnQuickConsult = document.getElementById('btnQuickConsult');
 const btnScrollTop = document.getElementById('btnScrollTop');
 
+// 카카오톡 채널 모달 엘리먼트
+const kakaoConsultModal = document.getElementById('kakaoConsultModal');
+const closeKakaoModalBtn = document.getElementById('closeKakaoModalBtn');
+const btnCopyOrderTemplate = document.getElementById('btnCopyOrderTemplate');
+const orderTemplateText = document.getElementById('orderTemplateText');
+
 // 상품 상세 모달 엘리먼트
 const detailModal = document.getElementById('detailModal');
 const modalImg = document.getElementById('modalImg');
@@ -503,13 +509,43 @@ function setupFloatingWidgets() {
     });
   }
 
-  // 1:1 빠른 문의
+  // 1:1 카톡 상담 및 간편 주문 모달 오픈
   if (btnQuickConsult) {
-    btnQuickConsult.addEventListener('click', () => {
-      alert('📱 NS HOME 1:1 고객만족센터\n\n• 카카오톡 문의: 평일 10:00 ~ 17:00\n• 고객센터 전화: 070-4517-3352\n\n상품 및 배송 문의 시 친절하고 신속하게 답변해 드리겠습니다.');
+    btnQuickConsult.addEventListener('click', openKakaoModal);
+  }
+
+  // 카카오 모달 닫기
+  if (closeKakaoModalBtn) {
+    closeKakaoModalBtn.addEventListener('click', closeModals);
+  }
+
+  // 카톡 간편 주문 양식 원클릭 복사
+  if (btnCopyOrderTemplate && orderTemplateText) {
+    btnCopyOrderTemplate.addEventListener('click', () => {
+      const template = orderTemplateText.textContent.trim();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(template).then(() => {
+          showToast('📋 주문 양식이 복사되었습니다! 카카오톡 채팅방에 붙여넣어 주세요.');
+        }).catch(() => {
+          showToast('📋 주문 양식이 복사되었습니다.');
+        });
+      } else {
+        showToast('📋 주문 양식이 복사되었습니다.');
+      }
     });
   }
 }
+
+// 카카오톡 채널 모달 오픈
+window.openKakaoModal = function() {
+  closeModals();
+  if (modalBackdrop) modalBackdrop.classList.add('active');
+  if (kakaoConsultModal) {
+    kakaoConsultModal.style.display = 'block';
+    kakaoConsultModal.classList.add('active');
+  }
+  document.body.style.overflow = 'hidden';
+};
 
 // 최근 본 상품 목록 추가 및 렌더링
 function addRecentView(product) {
@@ -964,6 +1000,10 @@ function closeModals() {
   if (orderLookupModal) {
     orderLookupModal.classList.remove('active');
     orderLookupModal.style.display = 'none';
+  }
+  if (kakaoConsultModal) {
+    kakaoConsultModal.classList.remove('active');
+    kakaoConsultModal.style.display = 'none';
   }
   if (adminLoginModal) {
     adminLoginModal.classList.remove('active');

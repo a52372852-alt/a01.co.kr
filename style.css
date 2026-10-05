@@ -2162,3 +2162,196 @@ img {
   }
 }
 
+/* ==========================================================================
+   카카오톡 공식 채널 '엔에스벨류' 모달 스타일
+   ========================================================================== */
+.kakao-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+  width: 92%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 34px 28px;
+  z-index: 1060;
+}
+
+.kakao-modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.kakao-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEE500;
+  color: #3C1E1E;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+.kakao-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: var(--color-espresso);
+  margin-bottom: 4px;
+}
+.kakao-modal-subtitle {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+/* QR Presentation Card */
+.kakao-qr-card {
+  background: #FAF7F2;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+.kakao-qr-frame {
+  background: #FFFFFF;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #EAE3D6;
+  flex-shrink: 0;
+}
+.kakao-qr-img {
+  width: 140px;
+  height: 140px;
+  display: block;
+  object-fit: contain;
+}
+.kakao-qr-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--color-mocha);
+  line-height: 1.5;
+}
+.qr-guide-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.step-num {
+  width: 22px;
+  height: 22px;
+  background: var(--warm-terracotta);
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Direct Touch Button */
+.btn-kakao-direct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: #FEE500;
+  color: #3C1E1E;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(254, 229, 0, 0.4);
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+.btn-kakao-direct:hover {
+  background: #FADA0A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(254, 229, 0, 0.5);
+}
+
+/* Order Template Copy Box */
+.kakao-order-template-box {
+  background: #FFFFFF;
+  border: 1px dashed #D8CBB5;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+.template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  color: var(--color-espresso);
+}
+.btn-copy-template {
+  background: #FAF7F2;
+  border: 1px solid var(--color-border);
+  color: var(--warm-terracotta);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-copy-template:hover {
+  background: var(--warm-terracotta);
+  color: #FFFFFF;
+}
+.template-guide {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+.template-text {
+  background: #FDFBFA;
+  border: 1px solid #EAE3D6;
+  padding: 12px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--color-espresso);
+  white-space: pre-line;
+}
+
+.kakao-modal-footer {
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 14px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+@media (max-width: 540px) {
+  .kakao-qr-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .kakao-qr-guide {
+    text-align: left;
+  }
+}
+
+

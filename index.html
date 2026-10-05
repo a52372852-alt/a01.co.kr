@@ -256,13 +256,13 @@
           </div>
         </div>
 
-        <div class="trust-item">
-          <div class="trust-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <div class="trust-item" onclick="openKakaoModal()" style="cursor:pointer;" title="엔에스벨류 카카오톡 채널 상담 및 간편 주문 열기">
+          <div class="trust-icon" style="background:#FEE500; color:#3C1E1E;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.772c0 2.72 1.8 5.105 4.54 6.453-.198.745-.717 2.697-.822 3.12-.132.532.193.525.408.383.167-.11 2.656-1.815 3.73-2.556.71.102 1.442.158 2.144.158 5.523 0 10-3.477 10-7.772C22 6.477 17.523 3 12 3z"/></svg>
           </div>
           <div class="trust-text">
-            <h4>1:1 전담 고객만족센터</h4>
-            <p>카카오톡 및 고객센터 친절 상담</p>
+            <h4>1:1 카톡 상담 & 간편 주문</h4>
+            <p>엔에스벨류 채널 1초 연결 / 친절 상담</p>
           </div>
         </div>
       </div>
@@ -790,6 +790,62 @@
     <div id="lookupResultContainer" style="margin-top:20px;"></div>
   </div>
 
+  <!-- Kakao Channel Smart Order & Consult Modal -->
+  <div class="kakao-modal" id="kakaoConsultModal" role="dialog" aria-modal="true" style="display:none;">
+    <button class="btn-close-modal" id="closeKakaoModalBtn" aria-label="닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    
+    <div class="kakao-modal-header">
+      <div class="kakao-badge-pill">💛 카카오톡 공식 채널</div>
+      <h3 class="kakao-modal-title">엔에스벨류</h3>
+      <p class="kakao-modal-subtitle">NS HOME 1:1 실시간 상담 & 간편 주문 센터</p>
+    </div>
+
+    <!-- QR Code Presentation Card (PC용 최적화) -->
+    <div class="kakao-qr-card">
+      <div class="kakao-qr-frame">
+        <img src="images/kakao_channel_qr.png" alt="카카오톡 채널 엔에스벨류 QR코드" class="kakao-qr-img">
+      </div>
+      <div class="kakao-qr-guide">
+        <div class="qr-guide-step">
+          <span class="step-num">1</span>
+          <span>스마트폰 <strong>기본 카메라</strong>를 켜서 왼쪽 QR코드를 비춰주세요.</span>
+        </div>
+        <div class="qr-guide-step">
+          <span class="step-num">2</span>
+          <span>화면에 나타난 노란색 링크를 누르면 <strong>엔에스벨류</strong> 채팅방으로 1초 만에 연결됩니다.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Direct Button (모바일 터치 1초 연결) -->
+    <a href="https://pf.kakao.com/_TxefXX/chat" target="_blank" rel="noopener noreferrer" class="btn-kakao-direct" id="btnKakaoDirectLink">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.772c0 2.72 1.8 5.105 4.54 6.453-.198.745-.717 2.697-.822 3.12-.132.532.193.525.408.383.167-.11 2.656-1.815 3.73-2.556.71.102 1.442.158 2.144.158 5.523 0 10-3.477 10-7.772C22 6.477 17.523 3 12 3z"/></svg>
+      <span>카카오톡 채팅 바로 시작하기 (터치 1초 연결)</span>
+    </a>
+
+    <!-- Easy Order Template Copy Box (간편 주문 템플릿 복사) -->
+    <div class="kakao-order-template-box">
+      <div class="template-header">
+        <strong>📝 카톡 간편 주문 양식 (원클릭 복사)</strong>
+        <button type="button" class="btn-copy-template" id="btnCopyOrderTemplate">양식 복사하기</button>
+      </div>
+      <p class="template-guide">복잡한 결제창 대신 카톡으로 편하게 주문하세요! 아래 양식을 복사하여 채팅창에 붙여넣어 주시면 친절하게 접수해 드립니다.</p>
+      <div class="template-text" id="orderTemplateText">[NS HOME 엔에스벨류 카톡 간편 주문]
+1. 주문 상품/색상/수량: 
+2. 받으시는 분 성함: 
+3. 연락처: 
+4. 배송지 주소: 
+5. 입금자명: </div>
+    </div>
+
+    <div class="kakao-modal-footer">
+      <div>📞 고객센터 유선 상담: <strong>070-4517-3352</strong> (평일 10:00~17:00)</div>
+      <div>✨ 채널 친구 추가 시 신상품 출시 소식 및 시크릿 할인 쿠폰 제공</div>
+    </div>
+  </div>
+
   <!-- Floating Quick Actions Widget -->
   <aside class="floating-quick-widget" aria-label="빠른 메뉴 및 고객상담">
     <!-- 최근 본 상품 플로팅 버튼 & 레이어 -->
@@ -811,9 +867,9 @@
     </div>
 
     <!-- 카카오톡 / 실시간 상담 바로가기 -->
-    <button type="button" class="btn-floating btn-floating-kakao" id="btnQuickConsult" aria-label="카카오톡 1:1 상담">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.772c0 2.72 1.8 5.105 4.54 6.453-.198.745-.717 2.697-.822 3.12-.132.532.193.525.408.383.167-.11 2.656-1.815 3.73-2.556.71.102 1.442.158 2.144.158 5.523 0 10-3.477 10-7.772C22 6.477 17.523 3 12 3z"/></svg>
-      <span class="floating-label">1:1문의</span>
+    <button type="button" class="btn-floating btn-floating-kakao" id="btnQuickConsult" aria-label="엔에스벨류 카카오톡 1:1 상담 및 간편 주문" title="엔에스벨류 카톡 채널 열기">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.772c0 2.72 1.8 5.105 4.54 6.453-.198.745-.717 2.697-.822 3.12-.132.532.193.525.408.383.167-.11 2.656-1.815 3.73-2.556.71.102 1.442.158 2.144.158 5.523 0 10-3.477 10-7.772C22 6.477 17.523 3 12 3z"/></svg>
+      <span class="floating-label">카톡상담</span>
     </button>
 
     <!-- 맨 위로 가기 버튼 -->
