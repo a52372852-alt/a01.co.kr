@@ -2,8 +2,11 @@
 
 // 상태 관리
 let currentFilter = 'all';
+let searchKeyword = '';
 let cart = JSON.parse(localStorage.getItem('ns_cart') || '[]');
 let customProducts = JSON.parse(localStorage.getItem('ns_custom_products') || '[]');
+let orders = JSON.parse(localStorage.getItem('ns_orders') || '[]');
+let recentViews = JSON.parse(localStorage.getItem('ns_recent_views') || '[]');
 let welcomeCouponApplied = false;
 let selectedProduct = null;
 let currentOption = {
@@ -31,6 +34,28 @@ const shippingProgressText = document.getElementById('shippingProgressText');
 const shippingProgressFill = document.getElementById('shippingProgressFill');
 const toastEl = document.getElementById('toast');
 
+// 검색 엘리먼트
+const headerSearchInput = document.getElementById('headerSearchInput');
+const headerSearchClear = document.getElementById('headerSearchClear');
+const searchResultNotice = document.getElementById('searchResultNotice');
+
+// 비회원 주문조회 모달
+const orderLookupModal = document.getElementById('orderLookupModal');
+const openOrderLookupBtn = document.getElementById('openOrderLookupBtn');
+const closeOrderLookupBtn = document.getElementById('closeOrderLookupBtn');
+const orderLookupForm = document.getElementById('orderLookupForm');
+const lookupSearchInput = document.getElementById('lookupSearchInput');
+const lookupResultContainer = document.getElementById('lookupResultContainer');
+
+// 플로팅 위젯 엘리먼트
+const btnToggleRecentView = document.getElementById('btnToggleRecentView');
+const recentViewDropdown = document.getElementById('recentViewDropdown');
+const recentItemsList = document.getElementById('recentItemsList');
+const recentCountBadge = document.getElementById('recentCountBadge');
+const btnClearRecent = document.getElementById('btnClearRecent');
+const btnQuickConsult = document.getElementById('btnQuickConsult');
+const btnScrollTop = document.getElementById('btnScrollTop');
+
 // 상품 상세 모달 엘리먼트
 const detailModal = document.getElementById('detailModal');
 const modalImg = document.getElementById('modalImg');
@@ -46,6 +71,8 @@ const modalColorName = document.getElementById('modalColorName');
 const modalSizeSelect = document.getElementById('modalSizeSelect');
 const modalSpecList = document.getElementById('modalSpecList');
 const modalQtyInput = document.getElementById('modalQty');
+const btnShareProduct = document.getElementById('btnShareProduct');
+const modalGalleryThumbs = document.getElementById('modalGalleryThumbs');
 
 // 결제 모달 엘리먼트
 const checkoutModal = document.getElementById('checkoutModal');
@@ -89,12 +116,39 @@ let uploadedDetailImagesBase64 = [];
 
 // 1. 초기화
 document.addEventListener('DOMContentLoaded', () => {
+  initMockOrdersIfNeeded();
   renderProducts();
   renderReviews();
   updateCartUI();
   setupEventListeners();
+  setupSearch();
+  setupModalTabs();
+  startDispatchCountdown();
+  setupOrderLookup();
+  setupFloatingWidgets();
+  renderRecentViews();
   setupAdminSystem();
 });
+
+// 테스트용 모의 주문 내역 초기화 (최초 1회)
+function initMockOrdersIfNeeded() {
+  if (orders.length === 0) {
+    orders = [
+      {
+        orderId: 'NS-20241005-01',
+        name: '홍길동',
+        phone: '010-1234-5678',
+        address: '서울특별시 강남구 테헤란로 152 101동 1204호',
+        date: new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+        productSummary: 'NS 프리미엄 웜 플리스 극세사 담요 (테라코타 카멜, 싱글)',
+        totalPrice: 38900,
+        status: '배송준비중',
+        trackingNumber: '우체국택배 6892-4112-9901'
+      }
+    ];
+    localStorage.setItem('ns_orders', JSON.stringify(orders));
+  }
+}
 
 // 2. 이벤트 리스너 등록
 function setupEventListeners() {
@@ -157,7 +211,7 @@ function setupEventListeners() {
     modalAddToCartBtn.addEventListener('click', () => {
       if (!selectedProduct) return;
       const qty = parseInt(modalQtyInput.value, 10) || 1;
-      const sizeObj = selectedProduct.sizes[modalSizeSelect.selectedIndex];
+      const sizeObj = (selectedProduct.sizes && selectedProduct.sizes[modalSizeSelect.selectedIndex]) || { name: '기본', extraPrice: 0 };
       addToCart(selectedProduct, currentOption.color, sizeObj, qty);
       closeModals();
       openCart();
@@ -170,10 +224,27 @@ function setupEventListeners() {
     modalBuyNowBtn.addEventListener('click', () => {
       if (!selectedProduct) return;
       const qty = parseInt(modalQtyInput.value, 10) || 1;
-      const sizeObj = selectedProduct.sizes[modalSizeSelect.selectedIndex];
+      const sizeObj = (selectedProduct.sizes && selectedProduct.sizes[modalSizeSelect.selectedIndex]) || { name: '기본', extraPrice: 0 };
       addToCart(selectedProduct, currentOption.color, sizeObj, qty);
       closeModals();
       openCheckout();
+    });
+  }
+
+  // 상품 링크 복사 (공유하기)
+  if (btnShareProduct) {
+    btnShareProduct.addEventListener('click', () => {
+      if (!selectedProduct) return;
+      const url = `${window.location.origin}${window.location.pathname}?product=${encodeURIComponent(selectedProduct.id)}`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('🔗 상품 공유 링크가 클립보드에 복사되었습니다.');
+        }).catch(() => {
+          showToast('🔗 링크가 생성되었습니다: ' + url);
+        });
+      } else {
+        showToast('🔗 링크가 생성되었습니다: ' + url);
+      }
     });
   }
 
@@ -229,6 +300,258 @@ function setupEventListeners() {
   });
 }
 
+// 2-1. 검색 시스템 설정
+function setupSearch() {
+  if (!headerSearchInput) return;
+
+  headerSearchInput.addEventListener('input', (e) => {
+    searchKeyword = e.target.value.trim().toLowerCase();
+    if (headerSearchClear) {
+      headerSearchClear.style.display = searchKeyword ? 'block' : 'none';
+    }
+    renderProducts();
+  });
+
+  if (headerSearchClear) {
+    headerSearchClear.addEventListener('click', () => {
+      headerSearchInput.value = '';
+      searchKeyword = '';
+      headerSearchClear.style.display = 'none';
+      renderProducts();
+      headerSearchInput.focus();
+    });
+  }
+}
+
+// 키워드로 상품 필터링 (인기 검색어 태그 클릭)
+window.filterByKeyword = function(keyword) {
+  if (headerSearchInput) {
+    headerSearchInput.value = keyword;
+    if (headerSearchClear) headerSearchClear.style.display = 'block';
+  }
+  searchKeyword = keyword.toLowerCase();
+  
+  // 전체 탭으로 변경
+  const tabs = document.querySelectorAll('.season-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  const allTab = document.querySelector('.season-tab[data-filter="all"]');
+  if (allTab) allTab.classList.add('active');
+  currentFilter = 'all';
+
+  renderProducts();
+
+  // 상품 섹션으로 스크롤 이동
+  const prodSec = document.getElementById('products');
+  if (prodSec) {
+    prodSec.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+// 2-2. 상세 모달 탭 설정
+function setupModalTabs() {
+  const tabBtns = document.querySelectorAll('.modal-tab-btn');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const targetTab = btn.dataset.tab;
+      document.querySelectorAll('.modal-tab-panel').forEach(panel => {
+        panel.style.display = panel.id === targetTab ? 'block' : 'none';
+      });
+    });
+  });
+}
+
+// 2-3. 당일 발송 카운트다운 타이머
+function startDispatchCountdown() {
+  const countdownEl = document.getElementById('topDispatchCountdown');
+  if (!countdownEl) return;
+
+  function updateTimer() {
+    const now = new Date();
+    // 매일 낮 12:00:00 기준 당일 발송 마감
+    const target = new Date();
+    target.setHours(12, 0, 0, 0);
+
+    if (now > target) {
+      // 12시가 지났으면 다음 날 12시로 설정
+      target.setDate(target.getDate() + 1);
+    }
+
+    const diff = target - now;
+    const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+    const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+    const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+
+    countdownEl.innerHTML = `⚡ 오늘 출발 마감까지 <strong>${hours}:${minutes}:${seconds}</strong>`;
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+// 2-4. 비회원 주문조회 모달 설정
+function setupOrderLookup() {
+  if (openOrderLookupBtn) {
+    openOrderLookupBtn.addEventListener('click', () => {
+      closeModals();
+      modalBackdrop.classList.add('active');
+      orderLookupModal.style.display = 'block';
+      orderLookupModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (lookupSearchInput) lookupSearchInput.focus();
+    });
+  }
+
+  if (closeOrderLookupBtn) {
+    closeOrderLookupBtn.addEventListener('click', closeModals);
+  }
+
+  if (orderLookupForm) {
+    orderLookupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = lookupSearchInput.value.trim().replace(/[-\s]/g, '');
+      if (!query) return;
+
+      const matched = orders.filter(o => {
+        const cleanPhone = (o.phone || '').replace(/[-\s]/g, '');
+        const cleanName = (o.name || '').trim();
+        const cleanOrderId = (o.orderId || '').replace(/[-\s]/g, '');
+        return cleanPhone.includes(query) || cleanName.includes(query) || cleanOrderId.includes(query);
+      });
+
+      if (!lookupResultContainer) return;
+
+      if (matched.length === 0) {
+        lookupResultContainer.innerHTML = `
+          <div style="text-align:center; padding:24px 12px; background:#FAF7F2; border-radius:8px;">
+            <p style="color:var(--color-muted); font-size:0.9rem; margin-bottom:8px;">입력하신 정보로 조회된 주문 내역이 없습니다.</p>
+            <p style="font-size:0.8rem; color:#8C8077;">* 주문 시 작성하신 성함 또는 연락처를 다시 확인해 주세요.<br>(예시 테스트: 홍길동 또는 01012345678)</p>
+          </div>
+        `;
+      } else {
+        lookupResultContainer.innerHTML = `
+          <div style="font-size:0.88rem; font-weight:700; color:var(--color-espresso); margin-bottom:12px;">
+            조회된 주문 내역 총 ${matched.length}건
+          </div>
+          ${matched.map(item => `
+            <div class="order-lookup-card">
+              <div class="order-lookup-head">
+                <div>
+                  <strong style="color:var(--color-espresso); font-size:0.92rem;">주문번호: ${item.orderId}</strong>
+                  <div style="font-size:0.78rem; color:var(--color-muted); margin-top:2px;">주문일자: ${item.date || '최근'}</div>
+                </div>
+                <span class="order-status-badge">🚚 ${item.status || '배송준비중'}</span>
+              </div>
+              <div style="font-size:0.86rem; line-height:1.6; color:var(--color-mocha);">
+                <div><strong>주문상품:</strong> ${item.productSummary || item.name}</div>
+                <div><strong>받는분:</strong> ${item.name} (${item.phone})</div>
+                <div><strong>배송지:</strong> ${item.address}</div>
+                <div><strong>결제금액:</strong> <strong style="color:var(--warm-terracotta);">${(item.totalPrice || 0).toLocaleString()}원</strong></div>
+                ${item.trackingNumber ? `<div style="margin-top:6px; font-size:0.8rem; color:#2F7A4D;">운송장: ${item.trackingNumber}</div>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        `;
+      }
+    });
+  }
+}
+
+// 2-5. 플로팅 퀵 액션 위젯 (최근본상품, TOP스크롤, 1:1문의)
+function setupFloatingWidgets() {
+  // 맨 위로 스크롤
+  window.addEventListener('scroll', () => {
+    if (btnScrollTop) {
+      if (window.scrollY > 300) {
+        btnScrollTop.style.display = 'flex';
+      } else {
+        btnScrollTop.style.display = 'none';
+      }
+    }
+  });
+
+  if (btnScrollTop) {
+    btnScrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // 최근 본 상품 토글
+  if (btnToggleRecentView && recentViewDropdown) {
+    btnToggleRecentView.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = recentViewDropdown.style.display === 'block';
+      recentViewDropdown.style.display = isVisible ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!recentViewDropdown.contains(e.target) && e.target !== btnToggleRecentView) {
+        recentViewDropdown.style.display = 'none';
+      }
+    });
+  }
+
+  // 최근 본 상품 전체 삭제
+  if (btnClearRecent) {
+    btnClearRecent.addEventListener('click', () => {
+      recentViews = [];
+      localStorage.setItem('ns_recent_views', JSON.stringify(recentViews));
+      renderRecentViews();
+      showToast('최근 본 상품 목록이 비워졌습니다.');
+    });
+  }
+
+  // 1:1 빠른 문의
+  if (btnQuickConsult) {
+    btnQuickConsult.addEventListener('click', () => {
+      alert('📱 NS HOME 1:1 고객만족센터\n\n• 카카오톡 문의: 평일 10:00 ~ 17:00\n• 고객센터 전화: 070-4517-3352\n\n상품 및 배송 문의 시 친절하고 신속하게 답변해 드리겠습니다.');
+    });
+  }
+}
+
+// 최근 본 상품 목록 추가 및 렌더링
+function addRecentView(product) {
+  if (!product) return;
+  // 중복 제거 후 최상단 추가
+  recentViews = recentViews.filter(p => p.id !== product.id);
+  recentViews.unshift({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: (product.images && product.images[0]) ? product.images[0] : 'images/blanket_fluffy.jpg'
+  });
+  // 최대 6개 유지
+  if (recentViews.length > 6) recentViews.pop();
+  localStorage.setItem('ns_recent_views', JSON.stringify(recentViews));
+  renderRecentViews();
+}
+
+function renderRecentViews() {
+  if (!recentItemsList) return;
+  
+  if (recentCountBadge) {
+    recentCountBadge.textContent = recentViews.length;
+    recentCountBadge.style.display = recentViews.length > 0 ? 'flex' : 'none';
+  }
+
+  if (recentViews.length === 0) {
+    recentItemsList.innerHTML = `<div class="recent-empty">최근 본 상품이 없습니다.</div>`;
+    return;
+  }
+
+  recentItemsList.innerHTML = recentViews.map(item => `
+    <div class="recent-item" onclick="openProductDetail('${item.id}')">
+      <img src="${item.image}" alt="${item.name}" class="recent-thumb">
+      <div style="flex:1; overflow:hidden;">
+        <div class="recent-title">${item.name}</div>
+        <div class="recent-price">${(item.price || 0).toLocaleString()}원</div>
+      </div>
+    </div>
+  `).join('');
+}
+
 // 3. 상품 렌더링
 function renderProducts() {
   if (!productGrid) return;
@@ -236,17 +559,43 @@ function renderProducts() {
 
   const all = getAllProducts();
   const filtered = all.filter(p => {
-    if (currentFilter === 'all') return true;
-    if (currentFilter === 'winter') return p.season === 'winter';
-    if (currentFilter === 'summer') return p.season === 'summer';
-    if (currentFilter === 'best') return p.isBest;
+    // 1) 계절/베스트 필터
+    if (currentFilter === 'winter' && p.season !== 'winter') return false;
+    if (currentFilter === 'summer' && p.season !== 'summer') return false;
+    if (currentFilter === 'best' && !p.isBest) return false;
+
+    // 2) 검색어 필터
+    if (searchKeyword) {
+      const matchName = (p.name || '').toLowerCase().includes(searchKeyword);
+      const matchSub = (p.subtitle || '').toLowerCase().includes(searchKeyword);
+      const matchDesc = (p.description || '').toLowerCase().includes(searchKeyword);
+      const matchTags = (p.tags || []).some(t => t.toLowerCase().includes(searchKeyword));
+      if (!matchName && !matchSub && !matchDesc && !matchTags) return false;
+    }
+
     return true;
   });
+
+  // 검색 결과 알림 바 표시
+  if (searchResultNotice) {
+    if (searchKeyword) {
+      searchResultNotice.style.display = 'flex';
+      searchResultNotice.innerHTML = `
+        <span>검색어 <strong>"${searchKeyword}"</strong> 검색 결과 (${filtered.length}건)</span>
+        <button type="button" onclick="filterByKeyword('')">검색 초기화</button>
+      `;
+    } else {
+      searchResultNotice.style.display = 'none';
+    }
+  }
 
   if (filtered.length === 0) {
     productGrid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--color-muted);">
-        <p>선택하신 카테고리에 등록된 상품이 없습니다.</p>
+        <p style="font-size:1.05rem; margin-bottom:12px;">선택하신 조건에 맞는 상품이 없습니다.</p>
+        <button type="button" class="btn-primary" onclick="filterByKeyword('')" style="display:inline-block; padding:8px 20px;">
+          전체 상품 보기
+        </button>
       </div>
     `;
     return;
@@ -280,7 +629,6 @@ function renderProducts() {
         <h3 class="product-name" onclick="openProductDetail('${product.id}')">${product.name}</h3>
         <p class="product-sub">${product.subtitle || ''}</p>
 
-
         <div class="product-price-row">
           <div class="price-block">
             <span class="discount-rate">${product.discountRate || 30}%</span>
@@ -300,7 +648,6 @@ function renderProducts() {
         </div>
       </div>
     `;
-
     productGrid.appendChild(card);
   });
 }
@@ -310,6 +657,9 @@ function openProductDetail(productId) {
   const all = getAllProducts();
   selectedProduct = all.find(p => p.id === productId);
   if (!selectedProduct) return;
+
+  // 최근 본 상품에 기록
+  addRecentView(selectedProduct);
 
   const colors = selectedProduct.colors && selectedProduct.colors.length > 0 
     ? selectedProduct.colors 
@@ -322,14 +672,39 @@ function openProductDetail(productId) {
   currentOption.color = colors[0];
   currentOption.size = sizes[0];
 
-  modalImg.src = selectedProduct.images && selectedProduct.images[0] ? selectedProduct.images[0] : 'images/blanket_fluffy.jpg';
+  const mainImgUrl = selectedProduct.images && selectedProduct.images[0] ? selectedProduct.images[0] : 'images/blanket_fluffy.jpg';
+  modalImg.src = mainImgUrl;
   modalImg.alt = selectedProduct.name;
+
+  // 갤러리 서브 썸네일 렌더링
+  if (modalGalleryThumbs) {
+    const allImages = [...(selectedProduct.images || [])];
+    if (allImages.length > 1) {
+      modalGalleryThumbs.innerHTML = allImages.map((imgSrc, idx) => `
+        <img src="${imgSrc}" alt="썸네일 ${idx + 1}" class="modal-thumb-mini ${idx === 0 ? 'active' : ''}" onclick="changeModalImage(this, '${imgSrc}')">
+      `).join('');
+      modalGalleryThumbs.style.display = 'flex';
+    } else {
+      modalGalleryThumbs.innerHTML = '';
+      modalGalleryThumbs.style.display = 'none';
+    }
+  }
+
   modalBadge.textContent = selectedProduct.badge || 'BEST';
   modalTitle.textContent = selectedProduct.name;
   modalSubtitle.textContent = selectedProduct.subtitle || '';
   if (modalRating) modalRating.textContent = '';
   modalDesc.textContent = selectedProduct.description || '편안하고 포근한 NS HOME의 엄선 계절 아이템입니다.';
   modalQtyInput.value = 1;
+
+  // 탭을 기본 '상품소개'로 리셋
+  const tabBtns = document.querySelectorAll('.modal-tab-btn');
+  tabBtns.forEach(b => b.classList.remove('active'));
+  const firstTabBtn = document.querySelector('.modal-tab-btn[data-tab="tabDesc"]');
+  if (firstTabBtn) firstTabBtn.classList.add('active');
+  document.querySelectorAll('.modal-tab-panel').forEach(p => {
+    p.style.display = p.id === 'tabDesc' ? 'block' : 'none';
+  });
 
   // 상세페이지 추가 이미지들 렌더링
   const modalDetailImages = document.getElementById('modalDetailImages');
@@ -586,6 +961,10 @@ function closeModals() {
   if (detailModal) detailModal.classList.remove('active');
   if (checkoutModal) checkoutModal.classList.remove('active');
   if (successModal) successModal.classList.remove('active');
+  if (orderLookupModal) {
+    orderLookupModal.classList.remove('active');
+    orderLookupModal.style.display = 'none';
+  }
   if (adminLoginModal) {
     adminLoginModal.classList.remove('active');
     adminLoginModal.style.display = 'none';
@@ -596,6 +975,13 @@ function closeModals() {
   }
   document.body.style.overflow = '';
 }
+
+// 갤러리 메인 사진 교체
+window.changeModalImage = function(elem, newSrc) {
+  if (modalImg) modalImg.src = newSrc;
+  document.querySelectorAll('.modal-thumb-mini').forEach(el => el.classList.remove('active'));
+  if (elem) elem.classList.add('active');
+};
 
 // 7. 결제 처리 핸들러 (실제 결제 시뮬레이션)
 function handleCheckoutSubmit(e) {
@@ -641,6 +1027,22 @@ function handleCheckoutSubmit(e) {
       <div class="receipt-line"><span>주문 상품</span><span>${cart[0].name} 외 ${cart.length - 1 > 0 ? (cart.length - 1) + '건' : '1개'}</span></div>
       <div class="receipt-line strong"><span>최종 결제 금액</span><span style="color:var(--warm-terracotta); font-size:1.15rem;">${finalTotal.toLocaleString()}원</span></div>
     `;
+
+    // 주문 내역 영구 보관 (비회원 주문조회 연동)
+    const newOrderRecord = {
+      orderId: orderId,
+      name: buyerName,
+      phone: buyerPhone,
+      address: `${buyerAddress} ${buyerAddressDetail}`,
+      memo: buyerMemo,
+      date: new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+      productSummary: `${cart[0].name} (${cart[0].color}, ${cart[0].size}) 외 ${cart.length - 1 > 0 ? (cart.length - 1) + '건' : '1개'}`,
+      totalPrice: finalTotal,
+      status: '배송준비중',
+      trackingNumber: '우체국택배 배송 접수 준비중'
+    };
+    orders.unshift(newOrderRecord);
+    localStorage.setItem('ns_orders', JSON.stringify(orders));
 
     cart = [];
     saveCart();
