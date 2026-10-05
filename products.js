@@ -19,16 +19,7 @@ const PRODUCTS = [
       "images/detail/knee_detail_03.png",
       "images/detail/knee_detail_04.png",
       "images/detail/knee_detail_05.png",
-      "images/detail/knee_detail_06.png",
-      "images/detail/knee_detail_07.png",
-      "images/detail/knee_detail_08.png",
-      "images/detail/knee_detail_09.png",
-      "images/detail/knee_detail_10.png",
-      "images/detail/knee_detail_11.png",
-      "images/detail/knee_detail_12.png",
-      "images/detail/knee_detail_13.png",
-      "images/detail/knee_detail_14.png",
-      "images/detail/knee_detail_15.png"
+      "images/detail/knee_detail_06.png"
     ],
     badge: "베스트 1위",
     tags: ["무릎담요", "극세사섬유", "코지그레이", "차량/캠핑용", "사무실/소파용"],
@@ -68,16 +59,7 @@ const PRODUCTS = [
       "images/detail/knee_detail_03.png",
       "images/detail/knee_detail_04.png",
       "images/detail/knee_detail_05.png",
-      "images/detail/knee_detail_06.png",
-      "images/detail/knee_detail_07.png",
-      "images/detail/knee_detail_08.png",
-      "images/detail/knee_detail_09.png",
-      "images/detail/knee_detail_10.png",
-      "images/detail/knee_detail_11.png",
-      "images/detail/knee_detail_12.png",
-      "images/detail/knee_detail_13.png",
-      "images/detail/knee_detail_14.png",
-      "images/detail/knee_detail_15.png"
+      "images/detail/knee_detail_06.png"
     ],
     badge: "인기 추천",
     tags: ["무릎담요", "극세사섬유", "코지베이지", "기계세탁", "사무실/소파용"],
@@ -117,16 +99,7 @@ const PRODUCTS = [
       "images/detail/knee_detail_03.png",
       "images/detail/knee_detail_04.png",
       "images/detail/knee_detail_05.png",
-      "images/detail/knee_detail_06.png",
-      "images/detail/knee_detail_07.png",
-      "images/detail/knee_detail_08.png",
-      "images/detail/knee_detail_09.png",
-      "images/detail/knee_detail_10.png",
-      "images/detail/knee_detail_11.png",
-      "images/detail/knee_detail_12.png",
-      "images/detail/knee_detail_13.png",
-      "images/detail/knee_detail_14.png",
-      "images/detail/knee_detail_15.png"
+      "images/detail/knee_detail_06.png"
     ],
     badge: "시즌 신상",
     tags: ["무릎담요", "극세사섬유", "코지블루", "감성홈카페", "학생/사무실"],
@@ -142,6 +115,138 @@ const PRODUCTS = [
     details: [
       { label: "상품명", value: "NS 코지 극세사 무릎담요" },
       { label: "규격/사이즈", value: "무릎담요 (100 x 150cm)" },
+      { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
+      { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
+      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
+    ]
+  },
+  {
+    id: "ns-sofa-bed-cream",
+    name: "NS 코지 소파 & 침구용 담요 (크림베이지)",
+    subtitle: "포근하고 아늑한 대형 극세사 담요 • 소파 & 침구용",
+    season: "winter",
+    isBest: true,
+    isNew: true,
+    price: 42000,
+    rating: 4.97,
+    reviewCount: 312,
+    images: [
+      "images/sofa_bed_cream_beige.jpg"
+    ],
+    detailImages: [
+      "images/detail/knee_detail_07.png",
+      "images/detail/knee_detail_08.png",
+      "images/detail/knee_detail_09.png",
+      "images/detail/knee_detail_10.png",
+      "images/detail/knee_detail_11.png",
+      "images/detail/knee_detail_12.png",
+      "images/detail/knee_detail_13.png",
+      "images/detail/knee_detail_14.png",
+      "images/detail/knee_detail_15.png"
+    ],
+    badge: "소파&침구 베스트",
+    tags: ["소파침구용", "극세사담요", "크림베이지", "침대이불", "대형블랭킷"],
+    description: "편안한 휴식을 위해 섬유의 밀도와 촉감까지 세심하게 제작된 NS HOME 소파 & 침구용 프리미엄 극세사 담요입니다. 넉넉한 싱글/더블 사이즈로 소파 위 휴식부터 침실 베딩, 캠핑까지 사계절 내내 풍성한 온기를 전합니다.",
+    colors: [
+      { name: "크림베이지", hex: "#F3ECE2", extraPrice: 0 },
+      { name: "모던 그레이", hex: "#8A8D91", extraPrice: 0 },
+      { name: "포레스트 그린", hex: "#4B6B61", extraPrice: 0 }
+    ],
+    sizes: [
+      { name: "싱글 (150 x 200cm)", extraPrice: 0 },
+      { name: "더블 (180 x 200cm)", extraPrice: 7000 }
+    ],
+    details: [
+      { label: "상품명", value: "NS 코지 소파 & 침구용 극세사 담요" },
+      { label: "규격/사이즈", value: "싱글 150x200cm (42,000원) / 더블 180x200cm (49,000원)" },
+      { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
+      { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
+      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
+    ]
+  },
+  {
+    id: "ns-sofa-bed-gray",
+    name: "NS 코지 소파 & 침구용 담요 (모던 그레이)",
+    subtitle: "모던하고 차분한 북유럽 감성 • 소파 & 침구용 대형 극세사 담요",
+    season: "winter",
+    isBest: true,
+    isNew: true,
+    price: 42000,
+    rating: 4.95,
+    reviewCount: 268,
+    images: [
+      "images/sofa_bed_modern_gray.jpg"
+    ],
+    detailImages: [
+      "images/detail/knee_detail_07.png",
+      "images/detail/knee_detail_08.png",
+      "images/detail/knee_detail_09.png",
+      "images/detail/knee_detail_10.png",
+      "images/detail/knee_detail_11.png",
+      "images/detail/knee_detail_12.png",
+      "images/detail/knee_detail_13.png",
+      "images/detail/knee_detail_14.png",
+      "images/detail/knee_detail_15.png"
+    ],
+    badge: "인기 컬러",
+    tags: ["소파침구용", "극세사담요", "모던그레이", "차박캠핑", "거실인테리어"],
+    description: "모던하고 정제된 그레이 컬러로 거실 소파나 침실 어느 공간에나 세련되게 어우러집니다. 고밀도 섬유가 공기를 머금어 덮었을 때 체온을 오래도록 따뜻하게 유지시켜 줍니다.",
+    colors: [
+      { name: "모던 그레이", hex: "#8A8D91", extraPrice: 0 },
+      { name: "크림베이지", hex: "#F3ECE2", extraPrice: 0 },
+      { name: "포레스트 그린", hex: "#4B6B61", extraPrice: 0 }
+    ],
+    sizes: [
+      { name: "싱글 (150 x 200cm)", extraPrice: 0 },
+      { name: "더블 (180 x 200cm)", extraPrice: 7000 }
+    ],
+    details: [
+      { label: "상품명", value: "NS 코지 소파 & 침구용 극세사 담요" },
+      { label: "규격/사이즈", value: "싱글 150x200cm (42,000원) / 더블 180x200cm (49,000원)" },
+      { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
+      { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
+      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
+    ]
+  },
+  {
+    id: "ns-sofa-bed-green",
+    name: "NS 코지 소파 & 침구용 담요 (포레스트 그린)",
+    subtitle: "싱그러운 숲속의 휴식을 담은 • 소파 & 침구용 대형 극세사 담요",
+    season: "winter",
+    isBest: false,
+    isNew: true,
+    price: 42000,
+    rating: 4.93,
+    reviewCount: 194,
+    images: [
+      "images/sofa_bed_forest_green.jpg"
+    ],
+    detailImages: [
+      "images/detail/knee_detail_07.png",
+      "images/detail/knee_detail_08.png",
+      "images/detail/knee_detail_09.png",
+      "images/detail/knee_detail_10.png",
+      "images/detail/knee_detail_11.png",
+      "images/detail/knee_detail_12.png",
+      "images/detail/knee_detail_13.png",
+      "images/detail/knee_detail_14.png",
+      "images/detail/knee_detail_15.png"
+    ],
+    badge: "신규 컬러",
+    tags: ["소파침구용", "극세사담요", "포레스트그린", "감성침실", "사계절담요"],
+    description: "깊고 안정감 있는 포레스트 그린 컬러로 공간에 자연의 편안함을 선사합니다. 부드러운 극세사 촉감과 탄탄한 복원력으로 세탁 후에도 처음 상태 그대로 부드러움을 유지합니다.",
+    colors: [
+      { name: "포레스트 그린", hex: "#4B6B61", extraPrice: 0 },
+      { name: "크림베이지", hex: "#F3ECE2", extraPrice: 0 },
+      { name: "모던 그레이", hex: "#8A8D91", extraPrice: 0 }
+    ],
+    sizes: [
+      { name: "싱글 (150 x 200cm)", extraPrice: 0 },
+      { name: "더블 (180 x 200cm)", extraPrice: 7000 }
+    ],
+    details: [
+      { label: "상품명", value: "NS 코지 소파 & 침구용 극세사 담요" },
+      { label: "규격/사이즈", value: "싱글 150x200cm (42,000원) / 더블 180x200cm (49,000원)" },
       { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
       { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
       { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
