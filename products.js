@@ -1,39 +1,124 @@
-// NS HOME 계절 상품 데이터베이스
+// NS HOME 계절 상품 데이터베이스 (총 6개 라인업)
 const PRODUCTS = [
   {
-    id: "ns-blanket-fluffy",
-    name: "NS 프리미엄 웜 플리스 극세사 담요",
-    subtitle: "NS 시그니처 베스트셀러 • 닿는 순간 차오르는 극상의 포근함",
+    id: "ns-knee-blanket-beige",
+    name: "NS 코지 극세사 무릎담요 (코지 베이지)",
+    subtitle: "닿는 순간 차오르는 따스함 • 100x150cm 감성 포근 무릎담요",
     season: "winter",
     isBest: true,
     isNew: true,
-    price: 38900,
-    originalPrice: 59000,
-    discountRate: 34,
-    rating: 4.9,
-    reviewCount: 1420,
+    price: 26000,
+    rating: 4.95,
+    reviewCount: 382,
     images: [
-      "images/blanket_fluffy.jpg",
-      "images/hero.jpg"
+      "images/blanket_cozy_beige.jpg",
+      "images/blanket_cozy_all.jpg"
     ],
-    badge: "시그니처 1위",
-    tags: ["양면 극세사", "정전기 방지", "초경량 보온", "간편 기계세탁"],
-    description: "NS HOME의 시그니처 웜 플리스 담요는 고밀도 마이크로화이버 극세사 원단으로 제작되어 털 빠짐 없이 부드럽고 가볍게 체온을 유지해 줍니다. 찬 공기는 차단하고 체온을 가두는 에어셀 구조로 올겨울 당신의 휴식을 따스하게 안아드립니다.",
+    detailImages: [
+      "images/detail/knee_blanket_01.png",
+      "images/detail/knee_blanket_02.png",
+      "images/detail/knee_blanket_03.png",
+      "images/detail/knee_blanket_04.png",
+      "images/detail/knee_blanket_option.png"
+    ],
+    badge: "베스트 추천",
+    tags: ["무릎담요", "극세사섬유", "코지베이지", "기계세탁", "사무실/소파용"],
+    description: "NS HOME 3 COLORS LAP BLANKET 컬렉션의 대표 컬러 코지 베이지입니다. 촘촘하고 부드러운 극세사 섬유 사이에 미세한 공기층이 형성되어 몸 주변의 온기를 붙잡아 따뜻하게 감싸줍니다. 거실 소파, 사무실, 학교 등 머무는 곳 어디서나 가볍고 포근하게 체온을 지켜줍니다.",
     colors: [
-      { name: "테라코타 카멜", hex: "#B85D34", extraPrice: 0 },
-      { name: "오트밀 크림", hex: "#EAE3D2", extraPrice: 0 },
-      { name: "모카 브라운", hex: "#6F4E37", extraPrice: 0 }
+      { name: "코지 베이지", hex: "#EAE0D0", extraPrice: 0 },
+      { name: "코지 그레이", hex: "#C7C9CC", extraPrice: 0 },
+      { name: "코지 블루", hex: "#8DA4C4", extraPrice: 0 }
     ],
     sizes: [
-      { name: "싱글 (100 x 150cm) - 무릎/소파용", extraPrice: 0 },
-      { name: "슈퍼싱글 (150 x 200cm) - 침대/거실용", extraPrice: 9000 },
-      { name: "퀸 (180 x 200cm) - 패밀리/침대용", extraPrice: 16000 }
+      { name: "무릎담요 (100 x 150cm)", extraPrice: 0 }
     ],
     details: [
-      { label: "소재", value: "프리미엄 고밀도 마이크로화이버 플리스 100%" },
-      { label: "원산지", value: "대한민국 디자인 / 엄선 파트너 제조" },
-      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" },
-      { label: "품질", value: "정밀 검수 및 유해물질 불검출 안심 가공" }
+      { label: "상품명", value: "NS 코지 극세사 무릎담요" },
+      { label: "규격/사이즈", value: "무릎담요 (100 x 150cm)" },
+      { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
+      { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
+      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
+    ]
+  },
+  {
+    id: "ns-knee-blanket-gray",
+    name: "NS 코지 극세사 무릎담요 (코지 그레이)",
+    subtitle: "모던하고 차분한 북유럽 무드 • 100x150cm 감성 포근 무릎담요",
+    season: "winter",
+    isBest: true,
+    isNew: true,
+    price: 26000,
+    rating: 4.92,
+    reviewCount: 294,
+    images: [
+      "images/blanket_cozy_gray.jpg",
+      "images/blanket_cozy_gray_pet.jpg",
+      "images/blanket_cozy_all.jpg"
+    ],
+    detailImages: [
+      "images/detail/knee_blanket_01.png",
+      "images/detail/knee_blanket_02.png",
+      "images/detail/knee_blanket_03.png",
+      "images/detail/knee_blanket_04.png",
+      "images/detail/knee_blanket_option.png"
+    ],
+    badge: "인기 컬러",
+    tags: ["무릎담요", "극세사섬유", "코지그레이", "차량/캠핑용", "반려동물소파"],
+    description: "어떤 인테리어에도 세련되게 어울리는 코지 그레이 컬러입니다. 털 빠짐 없이 부드럽고 가벼우며, 랩탑 작업이나 독서, 차박 및 캠핑 시 간편하게 둘러주기 가장 알맞은 볼륨감으로 제작되었습니다.",
+    colors: [
+      { name: "코지 그레이", hex: "#C7C9CC", extraPrice: 0 },
+      { name: "코지 베이지", hex: "#EAE0D0", extraPrice: 0 },
+      { name: "코지 블루", hex: "#8DA4C4", extraPrice: 0 }
+    ],
+    sizes: [
+      { name: "무릎담요 (100 x 150cm)", extraPrice: 0 }
+    ],
+    details: [
+      { label: "상품명", value: "NS 코지 극세사 무릎담요" },
+      { label: "규격/사이즈", value: "무릎담요 (100 x 150cm)" },
+      { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
+      { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
+      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
+    ]
+  },
+  {
+    id: "ns-knee-blanket-blue",
+    name: "NS 코지 극세사 무릎담요 (코지 블루)",
+    subtitle: "화사하고 포근한 파스텔 톤 • 100x150cm 감성 포근 무릎담요",
+    season: "winter",
+    isBest: false,
+    isNew: true,
+    price: 26000,
+    rating: 4.9,
+    reviewCount: 185,
+    images: [
+      "images/blanket_cozy_blue.jpg",
+      "images/blanket_cozy_all.jpg"
+    ],
+    detailImages: [
+      "images/detail/knee_blanket_01.png",
+      "images/detail/knee_blanket_02.png",
+      "images/detail/knee_blanket_03.png",
+      "images/detail/knee_blanket_04.png",
+      "images/detail/knee_blanket_option.png"
+    ],
+    badge: "시즌 신상",
+    tags: ["무릎담요", "극세사섬유", "코지블루", "감성홈카페", "학생/사무실"],
+    description: "은은하고 고급스러운 톤다운 파스텔 블루 컬러로 공간에 화사한 생기를 불어넣어 줍니다. 도톰한 볼륨감과 가벼운 무게감으로 오랜 시간 무릎 위에 얹어두어도 편안합니다.",
+    colors: [
+      { name: "코지 블루", hex: "#8DA4C4", extraPrice: 0 },
+      { name: "코지 베이지", hex: "#EAE0D0", extraPrice: 0 },
+      { name: "코지 그레이", hex: "#C7C9CC", extraPrice: 0 }
+    ],
+    sizes: [
+      { name: "무릎담요 (100 x 150cm)", extraPrice: 0 }
+    ],
+    details: [
+      { label: "상품명", value: "NS 코지 극세사 무릎담요" },
+      { label: "규격/사이즈", value: "무릎담요 (100 x 150cm)" },
+      { label: "소재", value: "프리미엄 A-CLASS 고밀도 극세사 플리스 100%" },
+      { label: "마감", value: "헤링본 엣지 파이핑 세련된 밴딩 마감" },
+      { label: "세탁방법", value: "세탁망 사용 울코스 찬물 세탁, 자연 건조 권장" }
     ]
   },
   {
@@ -44,8 +129,6 @@ const PRODUCTS = [
     isBest: true,
     isNew: false,
     price: 64000,
-    originalPrice: 98000,
-    discountRate: 35,
     rating: 4.95,
     reviewCount: 528,
     images: [
@@ -67,73 +150,37 @@ const PRODUCTS = [
     details: [
       { label: "소재", value: "파인 울 70% + 퓨어 캐시미어 30%" },
       { label: "가공", value: "헤링본 위빙 & 브러시드 피니시" },
-      { label: "세탁방법", value: "드라이클리닝 권장 (또는 중성세제 미온수 단독 손세탁)" },
-      { label: "인증", value: "울마크 컴퍼니 인증 원사 사용" }
-    ]
-  },
-  {
-    id: "ns-blanket-check",
-    name: "NS 노르딕 플래드 체크 울 담요",
-    subtitle: "아늑한 윈터 무드를 더해주는 감성 홈&캠핑 체크 블랭킷",
-    season: "winter",
-    isBest: false,
-    isNew: true,
-    price: 45000,
-    originalPrice: 68000,
-    discountRate: 33,
-    rating: 4.88,
-    reviewCount: 312,
-    images: [
-      "images/blanket_check.jpg"
-    ],
-    badge: "NEW 시즌",
-    tags: ["노르딕 체크", "캠핑&차박 겸용", "도톰한 보온감"],
-    description: "빈티지하고 따뜻한 색감의 체크 패턴으로 감성 캠핑과 겨울철 홈스타일링 모두에 최적화된 담요입니다. 도톰한 두께감으로 야외 바람을 든든하게 막아주며 피부에 자극 없는 부드러운 감촉을 제공합니다.",
-    colors: [
-      { name: "코코아 체크", hex: "#7E6351", extraPrice: 0 },
-      { name: "포레스트 그린 체크", hex: "#3B4A3F", extraPrice: 0 }
-    ],
-    sizes: [
-      { name: "미디엄 (120 x 160cm)", extraPrice: 0 },
-      { name: "라지 (150 x 200cm)", extraPrice: 12000 }
-    ],
-    details: [
-      { label: "소재", value: "울 블렌드 아크릴 웜 패브릭 100%" },
-      { label: "용도", value: "거실 소파, 침실, 캠핑/차박, 사무실 무릎담요" },
-      { label: "세탁방법", value: "세탁기 울코스 또는 손세탁 권장" }
+      { label: "세탁방법", value: "드라이클리닝 권장 (또는 중성세제 미온수 단독 손세탁)" }
     ]
   },
   {
     id: "ns-summer-parasol",
     name: "NS 올데이 암막 초경량 린넨 양우산",
-    subtitle: "지난 여름 완판 신화 • 자외선 차단율 99.9% 초경량 카본",
+    subtitle: "자외선 99.9% 완벽 차단 • 비와 햇빛을 모두 막아주는 사계절 양우산",
     season: "summer",
     isBest: true,
     isNew: false,
     price: 32000,
-    originalPrice: 48000,
-    discountRate: 33,
-    rating: 4.92,
-    reviewCount: 2150,
+    rating: 4.91,
+    reviewCount: 840,
     images: [
       "images/parasol.jpg"
     ],
-    badge: "여름 베스트 1위",
-    tags: ["UPF 50+ 암막", "180g 초경량", "우천 겸용 방수", "천연 우드 핸들"],
-    description: "뜨거운 여름 태양빛과 자외선을 99.9% 차단하는 고성능 4중 암막 코팅 양우산입니다. 우아한 린넨 텍스처와 천연 원목 손잡이로 어떤 스타일링에도 어울리며, 단 180g의 가벼운 무게로 핸드백에 매일 휴대할 수 있습니다.",
+    badge: "여름 완판템",
+    tags: ["UPF50+ 차단", "초경량 198g", "티타늄 암막 코팅", "양우산 겸용"],
+    description: "초고밀도 린넨 텍스처 패브릭 안쪽에 4중 블랙 티타늄 암막 코팅을 적용하여 뜨거운 태양열과 자외선을 99.9% 반사 차단합니다. 카본 파이버 8K 살대를 적용하여 198g의 초경량 무게와 든든한 내풍성을 동시에 제공합니다.",
     colors: [
-      { name: "오트밀 베이지", hex: "#D6C7B2", extraPrice: 0 },
-      { name: "매트 블랙", hex: "#222222", extraPrice: 0 },
-      { name: "세이지 그린", hex: "#8FA38B", extraPrice: 0 }
+      { name: "내추럴 린넨 베이지", hex: "#E6DFD3", extraPrice: 0 },
+      { name: "세이지 올리브 그린", hex: "#8A9A86", extraPrice: 0 },
+      { name: "매트 딥 네이비", hex: "#2B3A4A", extraPrice: 0 }
     ],
     sizes: [
-      { name: "3단 컴팩트 폴딩 (접었을 때 24cm)", extraPrice: 0 }
+      { name: "3단 컴팩트 수동 폴딩 (접었을 때 24cm)", extraPrice: 0 }
     ],
     details: [
-      { label: "차단율", value: "자외선 차단 UPF 50+ (UV-A / UV-B 99.9% 차단)" },
-      { label: "살대", value: "내풍성 항공 알루미늄 & 카본 파이버" },
-      { label: "무게", value: "약 185g (초경량 설계)" },
-      { label: "핸들", value: "천연 너도밤나무 원목 U자 핸들" }
+      { label: "원단", value: "300T 고밀도 린넨 텍스처 + 4중 티타늄 암막 코팅" },
+      { label: "살대", value: "고강도 항공 알루미늄 + 카본 파이버 8K" },
+      { label: "무게", value: "약 198g (초경량 설계)" }
     ]
   },
   {
@@ -144,8 +191,6 @@ const PRODUCTS = [
     isBest: true,
     isNew: false,
     price: 49000,
-    originalPrice: 79000,
-    discountRate: 38,
     rating: 4.86,
     reviewCount: 1890,
     images: [
@@ -164,8 +209,7 @@ const PRODUCTS = [
     details: [
       { label: "배터리", value: "4,000mAh 대용량 배터리 (최장 16시간 연속 가동)" },
       { label: "충전", value: "USB Type-C 고속 충전 (완충 약 2.5시간)" },
-      { label: "소음", value: "28dB 도서관 수준 저소음 BLDC 모터" },
-      { label: "안전", value: "스마트 과열 방지 보호 회로 센서 내장" }
+      { label: "소음", value: "28dB 도서관 수준 저소음 BLDC 모터" }
     ]
   }
 ];
@@ -174,11 +218,20 @@ const PRODUCTS = [
 const REVIEWS = [
   {
     author: "김*진 님 (공식몰 실구매자)",
-    product: "NS 프리미엄 웜 플리스 극세사 담요",
+    product: "NS 코지 극세사 무릎담요 (코지 베이지)",
     rating: 5,
     date: "2024.11.02",
     title: "보들보들함이 차원이 달라요! 털 빠짐 전혀 없음",
-    content: "추위를 많이 타서 추천 후기 보고 샀는데 진짜 살결 닿는 순간 온기가 확 올라와요. 세탁기 돌려도 털 뭉침이나 빠짐 1도 없고 테라코타 색감 너무 감성적입니다. 거실 소파에 두니 카페 같아요.",
+    content: "사무실에서 쓰려고 코지 베이지 샀는데 살결 닿는 순간 온기가 확 올라와요. 세탁기 울코스로 돌려도 털 뭉침이나 빠짐 1도 없고 테두리 파이핑 마감도 너무 깔끔합니다. 소파용으로 그레이도 하나 더 주문했어요!",
+    verified: true
+  },
+  {
+    author: "정*희 님 (공식몰 구매자)",
+    product: "NS 코지 극세사 무릎담요 (코지 그레이)",
+    rating: 5,
+    date: "2024.11.10",
+    title: "강아지가 이 담요만 보면 올라와서 자요 ㅎㅎ",
+    content: "너무 두껍지 않고 딱 가볍게 포근해서 컴퓨터 할 때 무릎에 덮기 딱 좋아요. 색상도 튀지 않고 모던해서 거실 인테리어 해치지 않아서 대만족입니다.",
     verified: true
   },
   {
@@ -196,16 +249,7 @@ const REVIEWS = [
     rating: 5,
     date: "2024.08.10",
     title: "여름 내내 제 필수템이었습니다",
-    content: "한여름 땡볕에 이거 쓰고 안 쓰고 체감 온도 차이가 어마어마해요. 린넨 소재라 양산 특유의 촌스러움이 전혀 없고 진짜 가볍습니다. 겨울 담요도 믿고 바로 주문했어요!",
-    verified: true
-  },
-  {
-    author: "최*서 님 (자사몰 구매자)",
-    product: "NS 하이브리드 에어로 아이스 넥쿨러",
-    rating: 5,
-    date: "2024.07.24",
-    title: "출퇴근길 살려준 인생템",
-    content: "목 뒤 닿는 쿨링 플레이트가 에어컨 뺨치게 시원합니다. 디자인도 로즈골드 포인트 들어가서 헤드폰처럼 예뻐요.",
+    content: "한여름 땡볕에 이거 쓰고 안 쓰고 체감 온도 차이가 어마어마해요. 린넨 소재라 양산 특유의 촌스러움이 전혀 없고 진짜 가볍습니다.",
     verified: true
   }
 ];

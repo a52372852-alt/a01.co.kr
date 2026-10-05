@@ -14,9 +14,10 @@ let currentOption = {
   size: null
 };
 
-// 모든 상품 데이터 조회 (커스텀 등록 상품 + 기본 상품)
+// 모든 상품 데이터 조회 (공식 기본 상품 6개 최우선 + 커스텀 등록 상품)
 function getAllProducts() {
-  return [...customProducts, ...PRODUCTS];
+  const customFiltered = customProducts.filter(cp => !PRODUCTS.some(p => p.id === cp.id));
+  return [...PRODUCTS, ...customFiltered];
 }
 
 // DOM Elements 캐시
@@ -667,10 +668,9 @@ function renderProducts() {
 
         <div class="product-price-row">
           <div class="price-block">
-            <span class="discount-rate">${product.discountRate || 30}%</span>
+            <span class="price-label-badge">정상가</span>
             <div class="final-price">${(product.price || 0).toLocaleString()}<span>원</span></div>
           </div>
-          <span class="original-price">${(product.originalPrice || Math.round(product.price * 1.4)).toLocaleString()}원</span>
         </div>
 
         <div class="card-actions">
@@ -817,8 +817,7 @@ function updateModalPrice() {
   const totalPrice = unitPrice * qty;
 
   modalPrice.textContent = `${totalPrice.toLocaleString()}원`;
-  const origPrice = selectedProduct.originalPrice || Math.round(selectedProduct.price * 1.4);
-  modalOriginalPrice.textContent = `${(origPrice * qty).toLocaleString()}원`;
+  if (modalOriginalPrice) modalOriginalPrice.style.display = 'none';
 }
 
 // 5. 장바구니 로직
