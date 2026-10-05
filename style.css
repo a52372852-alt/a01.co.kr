@@ -1356,17 +1356,13 @@ img {
   background: #FFFFFF;
 }
 .detail-images-860-wrap img {
-  width: 100%;
-  max-width: 860px;
+  width: 860px;
+  max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
   border: none;
   outline: none;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 .spec-table-box {
